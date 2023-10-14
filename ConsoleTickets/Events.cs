@@ -10,9 +10,41 @@ namespace ConsoleTickets
     {
         public string ShortNameEvent { get; set; }
         public string FullNameEvent { get; set; }
+        public StateEvent StateEvent { get; set; }
+        public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
+        public List<PriceByTicket> lPriceByTickets { get; set; } = new List<PriceByTicket>();
+    }
+
+    public class Schedule
+    {
+        public int Secuential { get; set; }
         public DateTime DateEvent { get; set; }
         public TimeSpan HourInitEvent { get; set; }
         public TimeSpan HourEndEvent { get; set; }
+    }
+
+    public class PriceByTicket
+    {
+        public int Secuential { get; set; }
+        public TypeTicket ETypeTicket { get; set; }
+        public decimal PriceTicket { get; set; }
+    }
+
+    public enum TypeTicket
+    {
+        General,
+        Tribuna,
+        Piso,
+        VIP
+    }
+
+    public enum StateEvent
+    {
+        Pending,
+        Confirmed,
+        Canceled,
+        Closed
 
     }
+
 }
