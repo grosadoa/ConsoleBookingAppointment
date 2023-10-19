@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace ConsoleTickets
 {
-    internal class PriceByTicketValidation
+    public class PriceByTicketValidation
     {
+        public static bool ExecuteValidatePriceByTicket(string ShortNameEvent, List<PriceByTicket> lSchedule, List<ScheduleGlobal> scheduleGlobals)
+        {
+            bool ValidPriceByTicket = default;
+
+           
+
+            return ValidPriceByTicket;
+        }
     }
 }
