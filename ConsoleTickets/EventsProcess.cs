@@ -18,20 +18,60 @@ namespace ConsoleTickets
             Events dataEvent = new Events();
 
             dataEvent = CreateEventData(dataEvent);
+            string inputDataUser = default;
+
+            if (String.IsNullOrEmpty(dataEvent.ShortNameEvent) || String.IsNullOrEmpty(dataEvent.FullNameEvent))
+            {
+                Console.WriteLine();
+
+                Console.WriteLine("You wish to modify or cancel[Yes/No]: ");
+                inputDataUser = Console.ReadLine();
+                if (inputDataUser == "Yes")
+                {
+                    dataEvent = CreateEventData(dataEvent);
+                }
+                else
+                {
+                    return;
+                }
+            }
 
             Console.WriteLine("Information to save: ");
             Console.WriteLine();
             Console.WriteLine($"Short Name Event: {dataEvent.ShortNameEvent}");
             Console.WriteLine($"Full Name Event: {dataEvent.FullNameEvent}");
+
+            bool IsValidateSchedule = default;
+            IsValidateSchedule = ScheduleValidation.ExecuteValidateSchedule(dataEvent.lSchedule);
             
-            dataEvent.lSchedule.ForEach(f => 
+            if (IsValidateSchedule)
+            {
+                dataEvent.lSchedule.ForEach(f =>
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Secuential: {f.Secuential}");
+                    Console.WriteLine($"Date Event: {f.DateEvent}");
+                    Console.WriteLine($"Init Hour Event: {f.HourInitEvent}");
+                    Console.WriteLine($"End Hour Event: {f.HourEndEvent}");
+                });
+            }
+            else
             {
                 Console.WriteLine();
-                Console.WriteLine($"Secuential: {f.Secuential}");
-                Console.WriteLine($"Date Event: {f.DateEvent}");
-                Console.WriteLine($"Init Hour Event: {f.HourInitEvent}");
-                Console.WriteLine($"End Hour Event: {f.HourEndEvent}");
-            });
+
+                Console.WriteLine("You wish to modify or cancel[Yes/No]: ");
+                inputDataUser = Console.ReadLine();
+
+                if (inputDataUser == "Yes")
+                {
+                    dataEvent = CreateEventData(dataEvent);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
             
             dataEvent.lPriceByTickets.ForEach(f => 
             {
@@ -41,8 +81,10 @@ namespace ConsoleTickets
                 Console.WriteLine($"TicketType Event: {f.ETypeTicket}");
             });
 
+            
+
             Console.WriteLine();
-            string inputDataUser = default;
+            
             Console.WriteLine("Are you sure you want to create[Yes/No/Modify]: ");
             inputDataUser = Console.ReadLine();
 
@@ -54,6 +96,11 @@ namespace ConsoleTickets
             else if(inputDataUser == "Modify")
             {
                 dataEvent = CreateEventData(dataEvent);
+                RepositorySystem.lEvents.Add(dataEvent);
+            }
+            else
+            {
+                Console.WriteLine("Process Create Canceled!");
             }
 
             Events CreateEventData(Events dataEvent)
@@ -114,7 +161,8 @@ namespace ConsoleTickets
                         {
                             case 1:
                                 scheduleProcess = new ScheduleProcess();
-                                scheduleProcess.CreateSchedule(dataEvent.lSchedule, dataEvent.ShortNameEvent);
+                                var dataSchedule = dataEvent.lSchedule;
+                                scheduleProcess.CreateSchedule(ref dataSchedule, dataEvent.ShortNameEvent);
                                 break;
                             case 2:
                                 scheduleProcess = new ScheduleProcess();

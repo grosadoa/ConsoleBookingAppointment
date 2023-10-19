@@ -8,7 +8,7 @@ namespace ConsoleTickets
 {
     public class ScheduleProcess
     {
-        public void CreateSchedule(List<Schedule> lSchedule, string NameEvent)
+        public void CreateSchedule(ref List<Schedule> lSchedule, string NameEvent)
         {
             Console.WriteLine($"You have selected the Create Schedule option.({NameEvent})");
             Console.WriteLine();
