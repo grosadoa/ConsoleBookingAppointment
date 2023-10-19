@@ -11,28 +11,27 @@ namespace ConsoleTickets
         public static bool ExecuteValidateSchedule(List<Schedule> lSchedule)
         {
             bool ValidSchedule = default;
-            List<int> noValidSchedule = new List<int>();
+
+            List<ScheduleValidate> noValidSchedulePeriodoDays = new List<ScheduleValidate>();
             lSchedule.ForEach(itemSchedule => 
             {
-                int dataNovalidSchedule = default;
-                bool IsValidatePeriodDaySchedule = default;
+                ScheduleValidate scheduleValidate = new ScheduleValidate();
+                scheduleValidate.InfoSchedule = itemSchedule;
+                bool IsValidateSchedule = default;
 
                 int valueMinDays = 60;
                 int valueMaxDays = 730;
 
-                IsValidatePeriodDaySchedule = ValidatePeriodDaySchedule(itemSchedule, valueMinDays, valueMaxDays);
+                IsValidateSchedule = ValidatePeriodDaySchedule(itemSchedule, valueMinDays, valueMaxDays);
+                scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
 
-                if (!IsValidatePeriodDaySchedule)
-                {
-                    dataNovalidSchedule = itemSchedule.Secuential;
-                    noValidSchedule.Add(dataNovalidSchedule);
-                }
-
+                
             });
 
             return ValidSchedule;
         }
 
+        //[statement] Solo se pueden colocar eventos desde 60 días posteriores hasta 2 años.
         private static bool ValidatePeriodDaySchedule(Schedule dataSchedule , int minDays, int maxDays)
         {
             bool IsValidatePeriodDaySchedule  = default;

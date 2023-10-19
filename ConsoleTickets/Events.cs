@@ -11,7 +11,7 @@ namespace ConsoleTickets
         public string ShortNameEvent { get; set; }
         public string FullNameEvent { get; set; }
         public StateEvent StateEvent { get; set; }
-        public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
+        public List<Schedule> lSchedule { get; set; } = new List<Schedule>();//[statement] Un evento puede llevarse a cabo una o varias veces
         public List<PriceByTicket> lPriceByTickets { get; set; } = new List<PriceByTicket>();
     }
 
@@ -45,6 +45,12 @@ namespace ConsoleTickets
         Canceled,
         Closed
 
+    }
+
+    public class ScheduleValidate
+    {
+        public Schedule InfoSchedule { get; set; }
+        public bool IsValidPeriodDays { get; set; }
     }
 
 }
