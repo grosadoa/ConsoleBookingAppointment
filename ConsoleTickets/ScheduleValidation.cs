@@ -22,7 +22,13 @@ namespace ConsoleTickets
                 int valueMinDays = 60;
                 int valueMaxDays = 730;
 
+                //[statement] Solo se pueden colocar eventos desde 60 días posteriores hasta 2 años.
                 IsValidateSchedule = ValidatePeriodDaySchedule(itemSchedule, valueMinDays, valueMaxDays);
+                scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
+
+                //[statement] Cada evento puede durar un máximo de 4 horas
+                int valueMaxHour = 4;
+                IsValidateSchedule = ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
                 scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
 
                 
@@ -31,7 +37,7 @@ namespace ConsoleTickets
             return ValidSchedule;
         }
 
-        //[statement] Solo se pueden colocar eventos desde 60 días posteriores hasta 2 años.
+        
         private static bool ValidatePeriodDaySchedule(Schedule dataSchedule , int minDays, int maxDays)
         {
             bool IsValidatePeriodDaySchedule  = default;
@@ -48,6 +54,25 @@ namespace ConsoleTickets
             }
 
             return IsValidatePeriodDaySchedule;
+        }
+
+        
+        private static bool ValidateTimeHourSchedule(Schedule dataSchedule, int maxHourSchedule)
+        {
+            bool IsValidateTimeHour = default;
+
+            int TotalDiffHour = int.Parse($"{(dataSchedule.HourEndEvent - dataSchedule.HourInitEvent).TotalHours}");
+
+            if (maxHourSchedule > TotalDiffHour )
+            {
+                IsValidateTimeHour = true;
+            }
+            else
+            {
+                IsValidateTimeHour = false;
+            }
+
+            return IsValidateTimeHour;
         }
     }
 }
