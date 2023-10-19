@@ -8,30 +8,51 @@ namespace ConsoleTickets
 {
     public class ScheduleValidation
     {
-        public static bool ExecuteValidateSchedule(List<Schedule> lSchedule)
+        public static bool ExecuteValidateSchedule(string ShortNameEvent, List<Schedule> lSchedule, List<ScheduleGlobal> scheduleGlobals)
         {
             bool ValidSchedule = default;
 
-            List<ScheduleValidate> noValidSchedulePeriodoDays = new List<ScheduleValidate>();
+            List<ScheduleValidate> noValidSchedule = new List<ScheduleValidate>();
+            int valueMinDays = 60;
+            int valueMaxDays = 730;
+            int valueMaxHour = 4;
+
             lSchedule.ForEach(itemSchedule => 
             {
                 ScheduleValidate scheduleValidate = new ScheduleValidate();
                 scheduleValidate.InfoSchedule = itemSchedule;
                 bool IsValidateSchedule = default;
 
-                int valueMinDays = 60;
-                int valueMaxDays = 730;
-
                 //[statement] Solo se pueden colocar eventos desde 60 días posteriores hasta 2 años.
                 IsValidateSchedule = ValidatePeriodDaySchedule(itemSchedule, valueMinDays, valueMaxDays);
                 scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
 
                 //[statement] Cada evento puede durar un máximo de 4 horas
-                int valueMaxHour = 4;
                 IsValidateSchedule = ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
                 scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
 
                 
+                if(!scheduleValidate.IsValidPeriodDays || !scheduleValidate.IsValidateTimeHour)
+                {
+                    noValidSchedule.Add(scheduleValidate);
+                }
+
+            });
+
+            noValidSchedule.ForEach(itemSchedule =>
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{ShortNameEvent}\t{itemSchedule.InfoSchedule.DateEvent}\t{itemSchedule.InfoSchedule.HourInitEvent}\t{itemSchedule.InfoSchedule.HourEndEvent}");
+                if (itemSchedule.IsValidPeriodDays)
+                {
+                    Console.WriteLine($"* Periodo Day is Invalid. Recomneded Date Event Between {valueMinDays} Days and {valueMaxDays} Days");
+                }
+                
+                if (itemSchedule.IsValidateTimeHour)
+                {
+                    Console.WriteLine($"* Periodo Time is Invalid. Recomneded Hour Event Have max {valueMaxHour} Hour");
+                }
+
             });
 
             return ValidSchedule;

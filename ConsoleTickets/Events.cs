@@ -54,4 +54,10 @@ namespace ConsoleTickets
         public bool IsValidateTimeHour { get; set; }
     }
 
+    public class ScheduleGlobal
+    {
+        public string ShortNameEvent { get; set; }
+        public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
+    }
+
 }
