@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,16 @@ namespace ConsoleTickets
             PriceByTicket dataPriceByTicket = new PriceByTicket();
 
             Console.WriteLine("Please enter the Type Ticket: ");
-            dataPriceByTicket.ETypeTicket = Console.ReadLine();
+            string typeTicketInput = Console.ReadLine();
+
+            if (Enum.TryParse<TypeTicket>(typeTicketInput, out TypeTicket typeTicket))
+            {
+                dataPriceByTicket.ETypeTicket = typeTicket;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Type Ticket. Please enter a valid value.");
+            }
 
             Console.WriteLine("Please enter the Price Ticket: ");
             if (int.TryParse(Console.ReadLine(), out int price))

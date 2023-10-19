@@ -10,7 +10,7 @@ namespace ConsoleTickets
     public class PriceByTicketValidation
     {
         
-        public bool IsValidPrice(PriceByTicket price, List<PriceByTicket> existingPrices)
+        public static bool IsValidPrice(PriceByTicket price, List<PriceByTicket> existingPrices)
         {
             switch (price.ETypeTicket)
             {
