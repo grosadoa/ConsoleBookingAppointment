@@ -52,6 +52,8 @@ namespace ConsoleTickets
         public Schedule InfoSchedule { get; set; }
         public bool IsValidPeriodDays { get; set; }
         public bool IsValidateTimeHour { get; set; }
+        public bool IsValidateConcurrenceIntoDay { get; set; }
+        public bool IsValidateConcurrenceIntoDayGlobal { get; set; }
     }
 
     public class ScheduleGlobal

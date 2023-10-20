@@ -95,5 +95,23 @@ namespace ConsoleTickets
 
             return IsValidateTimeHour;
         }
+
+        private static bool ValidateConcurrenceIntoDay(Schedule dataSchedule, List<Schedule> ldataSchedule)
+        {
+            bool IsValidateConcurrenceIntoDay = default;
+
+            int countEventIntoDay = ldataSchedule.Count(aCount => aCount.DateEvent.ToShortDateString() == dataSchedule.DateEvent.ToShortDateString());
+
+            if (countEventIntoDay > 1)
+            {
+                IsValidateConcurrenceIntoDay = true;
+            }
+            else
+            {
+                IsValidateConcurrenceIntoDay = false;
+            }
+
+            return IsValidateConcurrenceIntoDay;
+        }
     }
 }
