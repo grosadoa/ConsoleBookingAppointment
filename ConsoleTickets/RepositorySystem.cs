@@ -9,5 +9,6 @@ namespace ConsoleTickets
     public class RepositorySystem
     {
         public static List<Events> lEvents { get; set; } = new List<Events>();
+        public static List<PriceByTicket> lPriceByTicket { get; set; } = new List<PriceByTicket>();
     }
 }

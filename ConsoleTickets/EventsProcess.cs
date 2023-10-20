@@ -190,50 +190,55 @@ namespace ConsoleTickets
                     }
                 } while (TryMenuSchedule);
 
-                bool TryMenuPriceByTicket = default;
+
+
+                PriceByTicketProcess priceByTicketProcess = new PriceByTicketProcess();
+                bool TryMenuPriceByTicket = true;
+
                 do
                 {
-                    TryMenuPriceByTicket = true;
+                    Console.WriteLine("Price by Ticket Menu");
                     Console.WriteLine("1. Create Price-Ticket");
                     Console.WriteLine("2. List Price-Ticket");
-                    Console.WriteLine("3. Modified Price-Ticket");
+                    Console.WriteLine("3. Modify Price-Ticket");
                     Console.WriteLine("4. Delete Price-Ticket");
-                    Console.WriteLine("5. Continue...");
+                    Console.WriteLine("5. Exit");
 
                     Console.Write("Select an option: ");
-                    string input = Console.ReadLine();
-
-                    if (int.TryParse(input, out int choice))
+                    if (int.TryParse(Console.ReadLine(), out int choice))
                     {
-                        PriceByTicketProcess priceByTicketProcess = default;
                         switch (choice)
                         {
                             case 1:
-                                priceByTicketProcess = new PriceByTicketProcess();
                                 priceByTicketProcess.CreatePriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
+                                Console.WriteLine("Price Ticket created successfully.");
                                 break;
                             case 2:
-                                priceByTicketProcess = new PriceByTicketProcess();
                                 priceByTicketProcess.ListPriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
                                 break;
                             case 3:
-                                priceByTicketProcess = new PriceByTicketProcess();
-                                priceByTicketProcess.ModifiedPriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
+                                //priceByTicketProcess.ModifiedPriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
+                                Console.WriteLine("Price Ticket modified successfully.");
                                 break;
                             case 4:
-                                priceByTicketProcess = new PriceByTicketProcess();
-                                priceByTicketProcess.DeletePriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
+                                //priceByTicketProcess.DeletePriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
+                                Console.WriteLine("Price Ticket deleted successfully.");
                                 break;
                             case 5:
                                 Console.WriteLine("Exiting the program.");
                                 TryMenuPriceByTicket = false;
                                 break;
-
                             default:
+                                Console.WriteLine("Invalid choice. Please select a valid option.");
                                 break;
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                    }
                 } while (TryMenuPriceByTicket);
+
                 return dataEvent;
             } 
 
