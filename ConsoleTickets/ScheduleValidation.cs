@@ -8,7 +8,7 @@ namespace ConsoleTickets
 {
     public class ScheduleValidation
     {
-        public static bool ExecuteValidateSchedule(string ShortNameEvent, List<Schedule> lSchedule, List<ScheduleGlobal> scheduleGlobals)
+        public static bool ExecuteValidateSchedule(string ShortNameEvent, List<Schedule> lSchedule, List<ScheduleGlobalValidate> scheduleGlobals)
         {
             bool ValidSchedule = default;
 
@@ -30,9 +30,13 @@ namespace ConsoleTickets
                 //[statement] Cada evento puede durar un máximo de 4 horas
                 IsValidateSchedule = ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
                 scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
+                
+                //[statement] Cada evento puede durar un máximo de 4 horas
+                IsValidateSchedule = ValidateConcurrenceIntoDay(itemSchedule, lSchedule);
+                scheduleValidate.IsValidateConcurrenceIntoDay = IsValidateSchedule;
 
                 
-                if(!scheduleValidate.IsValidPeriodDays || !scheduleValidate.IsValidateTimeHour)
+                if(!scheduleValidate.IsValidPeriodDays || !scheduleValidate.IsValidateTimeHour || !scheduleValidate.IsValidateConcurrenceIntoDay)
                 {
                     noValidSchedule.Add(scheduleValidate);
                 }
@@ -45,12 +49,17 @@ namespace ConsoleTickets
                 Console.WriteLine($"{ShortNameEvent}\t{itemSchedule.InfoSchedule.DateEvent}\t{itemSchedule.InfoSchedule.HourInitEvent}\t{itemSchedule.InfoSchedule.HourEndEvent}");
                 if (itemSchedule.IsValidPeriodDays)
                 {
-                    Console.WriteLine($"* Periodo Day is Invalid. Recomneded Date Event Between {valueMinDays} Days and {valueMaxDays} Days");
+                    Console.WriteLine($"* Period Day is Invalid. Recomneded Date Event Between {valueMinDays} Days and {valueMaxDays} Days");
                 }
                 
                 if (itemSchedule.IsValidateTimeHour)
                 {
-                    Console.WriteLine($"* Periodo Time is Invalid. Recomneded Hour Event Have max {valueMaxHour} Hour");
+                    Console.WriteLine($"* Period Time is Invalid. Recomneded Hour Event Have max {valueMaxHour} Hour");
+                }
+                
+                if (itemSchedule.IsValidateConcurrenceIntoDay)
+                {
+                    Console.WriteLine($"* Validate Date, Exists Event in this Date. Recomneded change Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} Hour");
                 }
 
             });

@@ -42,8 +42,8 @@ namespace ConsoleTickets
             Console.WriteLine($"Full Name Event: {dataEvent.FullNameEvent}");
 
             bool IsValidateSchedule = default;
-            List<ScheduleGlobal> scheduleGlobals = new List<ScheduleGlobal>();
-            scheduleGlobals.AddRange(RepositorySystem.lEvents.Select(ss => new ScheduleGlobal() { ShortNameEvent = ss.ShortNameEvent, lSchedule = ss.lSchedule }));
+            List<ScheduleGlobalValidate> scheduleGlobals = new List<ScheduleGlobalValidate>();
+            scheduleGlobals.AddRange(RepositorySystem.lEvents.Select(ss => new ScheduleGlobalValidate() { ShortNameEvent = ss.ShortNameEvent, lSchedule = ss.lSchedule }));
             IsValidateSchedule = ScheduleValidation.ExecuteValidateSchedule(dataEvent.ShortNameEvent,dataEvent.lSchedule, scheduleGlobals);
             // RepositorySystem.lEvents
 

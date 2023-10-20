@@ -56,7 +56,7 @@ namespace ConsoleTickets
         public bool IsValidateConcurrenceIntoDayGlobal { get; set; }
     }
 
-    public class ScheduleGlobal
+    public class ScheduleGlobalValidate
     {
         public string ShortNameEvent { get; set; }
         public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
