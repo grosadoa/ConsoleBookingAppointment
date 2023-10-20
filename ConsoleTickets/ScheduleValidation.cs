@@ -43,6 +43,8 @@ namespace ConsoleTickets
 
             });
 
+
+
             noValidSchedule.ForEach(itemSchedule =>
             {
                 Console.WriteLine();
