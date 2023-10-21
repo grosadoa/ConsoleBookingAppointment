@@ -30,13 +30,26 @@ namespace ConsoleTickets
                 //[statement] Cada evento puede durar un máximo de 4 horas
                 IsValidateSchedule = ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
                 scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
-                
-                //[statement] Cada evento puede durar un máximo de 4 horas
-                IsValidateSchedule = ValidateConcurrenceIntoDay(itemSchedule, lSchedule);
+
+                //[statement] no se pueden tener más de dos eventos el mismo día (evaluando contra la misma programacion del evento)
+                IsValidateSchedule = ValidateConcurrenceIntoDayScheduleEvent(itemSchedule, lSchedule);
                 scheduleValidate.IsValidateConcurrenceIntoDay = IsValidateSchedule;
 
+                //[statement] no se pueden tener más de dos eventos el mismo día (evaluando contra la programacion global de todos los eventos)
+                IsValidateSchedule = ValidateConcurrenceIntoDayScheduleEventGlobal(itemSchedule, scheduleGlobals);
+                scheduleValidate.IsValidateConcurrenceIntoDayGlobal = IsValidateSchedule;
+
+                //[statement] No se pueden tener eventos simultáneos (evaluando contra la misma programacion del evento)
+                IsValidateSchedule = ValidateConcurrenceIntoHourScheduleEvent(itemSchedule, lSchedule);
+                scheduleValidate.IsValidateConcurrenceIntoHour = IsValidateSchedule;
+
+                //[statement] No se pueden tener eventos simultáneos (evaluando contra la programacion global de todos los eventos)
+                IsValidateSchedule = ValidateConcurrenceIntoHourScheduleEventGlobal(itemSchedule, scheduleGlobals);
+                scheduleValidate.IsValidateConcurrenceIntoHourGlobal = IsValidateSchedule;
+
                 
-                if(!scheduleValidate.IsValidPeriodDays || !scheduleValidate.IsValidateTimeHour || !scheduleValidate.IsValidateConcurrenceIntoDay)
+                if(!scheduleValidate.IsValidPeriodDays || !scheduleValidate.IsValidateTimeHour || !scheduleValidate.IsValidateConcurrenceIntoDay || 
+                    !scheduleValidate.IsValidateConcurrenceIntoDayGlobal || !scheduleValidate.IsValidateConcurrenceIntoHour || !scheduleValidate.IsValidateConcurrenceIntoHourGlobal)
                 {
                     noValidSchedule.Add(scheduleValidate);
                 }
@@ -61,7 +74,24 @@ namespace ConsoleTickets
                 
                 if (itemSchedule.IsValidateConcurrenceIntoDay)
                 {
-                    Console.WriteLine($"* Validate Date, Exists Event in this Date. Recomneded change Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} Hour");
+                    Console.WriteLine($"* Validate Date, In this event exists conflict Date. Recomneded update Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()}");
+                }
+                
+                if (itemSchedule.IsValidateConcurrenceIntoDayGlobal)
+                {
+                    Console.WriteLine($"* Validate Date, In other event exists conflict Date. Recomneded update Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} ");
+                }
+                
+                if (itemSchedule.IsValidateConcurrenceIntoHour)
+                {
+                    Console.WriteLine($"* Validate Date and Hour, In this event exists conflict Date. Recomneded update Date and Hour Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} " +
+                        $"- Hour ({itemSchedule.InfoSchedule.HourInitEvent}-{itemSchedule.InfoSchedule.HourEndEvent})");
+                }
+                
+                if (itemSchedule.IsValidateConcurrenceIntoHourGlobal)
+                {
+                    Console.WriteLine($"* Validate Date and Hour, In other event exists conflict Date. Recomneded update Date and Hour Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} " +
+                        $"- Hour ({itemSchedule.InfoSchedule.HourInitEvent}-{itemSchedule.InfoSchedule.HourEndEvent})");
                 }
 
             });
@@ -107,7 +137,7 @@ namespace ConsoleTickets
             return IsValidateTimeHour;
         }
 
-        private static bool ValidateConcurrenceIntoDay(Schedule dataSchedule, List<Schedule> ldataSchedule)
+        private static bool ValidateConcurrenceIntoDayScheduleEvent(Schedule dataSchedule, List<Schedule> ldataSchedule)
         {
             bool IsValidateConcurrenceIntoDay = default;
 
@@ -123,6 +153,44 @@ namespace ConsoleTickets
             }
 
             return IsValidateConcurrenceIntoDay;
+        }
+
+        private static bool ValidateConcurrenceIntoDayScheduleEventGlobal(Schedule dataSchedule, List<ScheduleGlobalValidate> ldataSchedule)
+        {
+            bool IsValidateConcurrenceIntoDayGlobal = default;
+
+            int countEventIntoDay = ldataSchedule.Count(aCount => aCount.DateEvent.ToShortDateString() == dataSchedule.DateEvent.ToShortDateString());
+
+            if (countEventIntoDay > 1)
+            {
+                IsValidateConcurrenceIntoDayGlobal = true;
+            }
+            else
+            {
+                IsValidateConcurrenceIntoDayGlobal = false;
+            }
+
+            return IsValidateConcurrenceIntoDayGlobal;
+        }
+
+        private static bool ValidateConcurrenceIntoHourScheduleEvent(Schedule dataSchedule, List<Schedule> ldataSchedule)
+        {
+            bool isValidateConcurrenceIntoHourScheduleEvent = default;
+
+            isValidateConcurrenceIntoHourScheduleEvent = ldataSchedule.Any(aa => aa.DateEvent.ToShortDateString() == dataSchedule.DateEvent.ToShortDateString() &&
+                dataSchedule.HourInitEvent >= aa.HourInitEvent  && dataSchedule.HourInitEvent <= dataSchedule.HourEndEvent);
+
+            return isValidateConcurrenceIntoHourScheduleEvent;
+        }
+        
+        private static bool ValidateConcurrenceIntoHourScheduleEventGlobal(Schedule dataSchedule, List<ScheduleGlobalValidate> ldataSchedule)
+        {
+            bool isValidateConcurrenceIntoHourScheduleEventGlobal = default;
+
+            isValidateConcurrenceIntoHourScheduleEventGlobal = ldataSchedule.Any(aa => aa.DateEvent.ToShortDateString() == dataSchedule.DateEvent.ToShortDateString() &&
+                dataSchedule.HourInitEvent >= aa.HourInitEvent  && dataSchedule.HourInitEvent <= dataSchedule.HourEndEvent);
+
+            return isValidateConcurrenceIntoHourScheduleEventGlobal;
         }
     }
 }

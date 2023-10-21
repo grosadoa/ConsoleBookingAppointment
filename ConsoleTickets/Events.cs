@@ -54,12 +54,14 @@ namespace ConsoleTickets
         public bool IsValidateTimeHour { get; set; }
         public bool IsValidateConcurrenceIntoDay { get; set; }
         public bool IsValidateConcurrenceIntoDayGlobal { get; set; }
+        public bool IsValidateConcurrenceIntoHour { get; set; }
+        public bool IsValidateConcurrenceIntoHourGlobal { get; set; }
     }
 
-    public class ScheduleGlobalValidate
+    public class ScheduleGlobalValidate : Schedule
     {
         public string ShortNameEvent { get; set; }
-        public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
+        //public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
     }
 
 }
