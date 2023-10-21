@@ -127,7 +127,7 @@ namespace ConsoleTickets
                 }
                 else
                 {
-                    Console.WriteLine("Should modified data event?[Yes/No]: ");
+                    Console.WriteLine("Should modified naming Info event?[Yes/No]: ");
                     inputDataUser = Console.ReadLine();
 
                     QuestionContinueEvent = inputDataUser == "Yes" ? true : false;
