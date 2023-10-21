@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTickets
+namespace BussinessTickets
 {
     public class ScheduleValidateProcess : ISchedule
     {
