@@ -11,12 +11,17 @@ namespace ConsoleTickets
     {
         public void CreatePriceByTicket(List<PriceByTicket> lPriceByTickets, string? shortNameEvent)
         {
-            Console.WriteLine($"You have selected the Create Price Ticket option.({shortNameEvent})");
+            Console.WriteLine($"You have selected the Create Price Ticket Event {shortNameEvent}");
             Console.WriteLine();
 
             PriceByTicket dataPriceByTicket = new PriceByTicket();
 
+            Console.WriteLine("0. General");
+            Console.WriteLine("1. Tribuna");
+            Console.WriteLine("2. Piso");
+            Console.WriteLine("3. VIP");
             Console.WriteLine("Please enter the Type Ticket: ");
+            
             string typeTicketInput = Console.ReadLine();
 
             if (Enum.TryParse<TypeTicket>(typeTicketInput, out TypeTicket typeTicket))
@@ -39,15 +44,15 @@ namespace ConsoleTickets
                 return;
             }
 
-            if (PriceByTicketValidation.IsValidPrice(dataPriceByTicket, lPriceByTickets))
-            {
+           /* if (PriceByTicketValidation.IsValidPrice(dataPriceByTicket, lPriceByTickets))
+            {*/
                 lPriceByTickets.Add(dataPriceByTicket);
                 Console.WriteLine($"Price Ticket added successfully for event {shortNameEvent}.");
-            }
+            /*}
             else
             {
                 Console.WriteLine("Error: Invalid Price Ticket. It doesn't meet the required conditions.");
-            }
+            }*/
         }
 
         public void DeletePriceByTicket(List<PriceByTicket> lPriceByTickets, string? shortNameEvent, TypeTicket typeToDelete)
