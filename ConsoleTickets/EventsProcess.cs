@@ -127,7 +127,7 @@ namespace ConsoleTickets
                 }
                 else
                 {
-                    Console.WriteLine("Should modified data event?[Yes/No]: ");
+                    Console.WriteLine("Should modified naming Info event?[Yes/No]: ");
                     inputDataUser = Console.ReadLine();
 
                     QuestionContinueEvent = inputDataUser == "Yes" ? true : false;
@@ -153,12 +153,13 @@ namespace ConsoleTickets
 
                 do
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Price by Ticket Menu");
                     Console.WriteLine("1. Create Price-Ticket");
                     Console.WriteLine("2. List Price-Ticket");
                     Console.WriteLine("3. Modify Price-Ticket");
                     Console.WriteLine("4. Delete Price-Ticket");
-                    Console.WriteLine("5. Exit");
+                    Console.WriteLine("5. Continue");
 
                     Console.Write("Select an option: ");
                     if (int.TryParse(Console.ReadLine(), out int choice))
@@ -210,9 +211,44 @@ namespace ConsoleTickets
                 Console.WriteLine();
                 Console.WriteLine($"Short Name Event: {e.ShortNameEvent}");
                 Console.WriteLine($"Full Name Event: {e.FullNameEvent}");
-                //Console.WriteLine($"Date Event: {e.DateEvent}");
-                //Console.WriteLine($"Init Hour Event: {e.HourInitEvent}");
-                //Console.WriteLine($"End Hour Event: {e.HourEndEvent}");
+
+                e.lSchedule.ForEach(e2 => 
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Sencuential Schedule: {e2.Secuential}");
+                    Console.WriteLine($"Date Schecule: {e2.DateEvent}");
+                    Console.WriteLine($"Init Hour Schedule: {e2.HourInitEvent}");
+                    Console.WriteLine($"End Hour Schedule: {e2.HourEndEvent}");
+                });  
+                
+                e.lPriceByTickets.ForEach(e3 => 
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Sencuential Price By Ticket: {e3.Secuential}");
+                    Console.WriteLine($"Price : {e3.PriceTicket}");
+
+                    string nameTicket = default;
+
+                    switch (e3.ETypeTicket)
+                    {
+                        case TypeTicket.General:
+                            nameTicket = Constants.NameTypeTickets.TicketGeneral;
+                            break;
+                        case TypeTicket.Tribuna:
+                            nameTicket = Constants.NameTypeTickets.TicketTribuna;
+                            break;
+                        case TypeTicket.Piso:
+                            nameTicket = Constants.NameTypeTickets.TicketPiso;
+                            break;
+                        case TypeTicket.VIP:
+                            nameTicket = Constants.NameTypeTickets.TicketVIP;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    Console.WriteLine($"Ticket: {nameTicket}");
+                });
                 Console.WriteLine();
             });
         }

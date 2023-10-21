@@ -34,6 +34,7 @@ namespace ConsoleTickets
                         case 2:
                             //scheduleProcess = new ScheduleProcess();
                             //scheduleProcess.ListSchedule(lSchedule, NameEvent);
+                            ListSchedule(lSchedule, NameEvent);
                             break;
                         case 3:
                             //scheduleProcess = new ScheduleProcess();
@@ -75,6 +76,8 @@ namespace ConsoleTickets
             inputDataUser = Console.ReadLine();
             dataSchedule.HourEndEvent = TimeSpan.Parse(inputDataUser);
 
+            dataSchedule.Secuential = lSchedule.Count + 1;
+
             lSchedule.Add(dataSchedule);
         }
 
@@ -85,7 +88,15 @@ namespace ConsoleTickets
 
         private static void ListSchedule(List<Schedule> lSchedule, string? shortNameEvent)
         {
-            throw new NotImplementedException();
+            lSchedule.ForEach(l => 
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Secuential Schedule : {l.Secuential}");
+                Console.WriteLine($"Date Schedule : {l.DateEvent}");
+                Console.WriteLine($"Init Hour Schedule : {l.HourInitEvent}");
+                Console.WriteLine($"End Hour Schedule : {l.HourEndEvent}");
+                Console.WriteLine();
+            });
         }
 
         private static void ModifiedSchedule(List<Schedule> lSchedule, string? shortNameEvent)
