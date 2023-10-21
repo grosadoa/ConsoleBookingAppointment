@@ -168,7 +168,7 @@ namespace ConsoleTickets
                         {
                             case 1:
                                 priceByTicketProcess.CreatePriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
-                                Console.WriteLine("Price Ticket created successfully.");
+                                //Console.WriteLine("Price Ticket created successfully.");
                                 break;
                             case 2:
                                 priceByTicketProcess.ListPriceByTicket(dataEvent.lPriceByTickets, dataEvent.ShortNameEvent);
