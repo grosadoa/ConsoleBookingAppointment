@@ -86,7 +86,7 @@ namespace ConsoleTickets
         {
             bool IsValidateTimeHour = default;
 
-            int TotalDiffHour = int.Parse($"{(dataSchedule.HourEndEvent - dataSchedule.HourInitEvent).TotalHours}");
+            int TotalDiffHour = int.Parse($"{Math.Truncate((dataSchedule.HourEndEvent - dataSchedule.HourInitEvent).TotalHours)}");
 
             if (maxHourSchedule > TotalDiffHour)
             {
