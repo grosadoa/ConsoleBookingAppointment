@@ -17,6 +17,10 @@ namespace ConsoleTickets
             PriceByTicket dataPriceByTicket = new PriceByTicket();
 
             Console.WriteLine("Please enter the Type Ticket: ");
+            Console.WriteLine("0. General");
+            Console.WriteLine("1. Tribuna");
+            Console.WriteLine("2. Piso");
+            Console.WriteLine("3. VIP");
             string typeTicketInput = Console.ReadLine();
 
             if (Enum.TryParse<TypeTicket>(typeTicketInput, out TypeTicket typeTicket))
