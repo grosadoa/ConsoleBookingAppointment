@@ -16,11 +16,11 @@ namespace ConsoleTickets
 
             if (countEventIntoDay > 1)
             {
-                IsValidateConcurrenceIntoDay = true;
+                IsValidateConcurrenceIntoDay = false;
             }
             else
             {
-                IsValidateConcurrenceIntoDay = false;
+                IsValidateConcurrenceIntoDay = true;
             }
 
             return IsValidateConcurrenceIntoDay;
@@ -29,6 +29,12 @@ namespace ConsoleTickets
         public bool ValidateConcurrenceIntoDayScheduleEventGlobal(Schedule dataSchedule, List<ScheduleGlobalValidate> ldataSchedule)
         {
             bool IsValidateConcurrenceIntoDayGlobal = default;
+
+            if(ldataSchedule.Count == 0)
+            {
+                IsValidateConcurrenceIntoDayGlobal = true;
+                return IsValidateConcurrenceIntoDayGlobal;
+            }
 
             int countEventIntoDay = ldataSchedule.Count(aCount => aCount.DateEvent.ToShortDateString() == dataSchedule.DateEvent.ToShortDateString());
 

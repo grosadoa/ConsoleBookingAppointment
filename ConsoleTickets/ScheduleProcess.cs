@@ -92,7 +92,7 @@ namespace ConsoleTickets
             {
                 Console.WriteLine();
                 Console.WriteLine($"Secuential Schedule : {l.Secuential}");
-                Console.WriteLine($"Date Schedule : {l.DateEvent}");
+                Console.WriteLine($"Date Schedule : {l.DateEvent.ToShortDateString()}");
                 Console.WriteLine($"Init Hour Schedule : {l.HourInitEvent}");
                 Console.WriteLine($"End Hour Schedule : {l.HourEndEvent}");
                 Console.WriteLine();

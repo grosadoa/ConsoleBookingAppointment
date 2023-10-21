@@ -67,7 +67,7 @@ namespace ConsoleTickets
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Secuential: {f.Secuential}");
-                    Console.WriteLine($"Date Event: {f.DateEvent}");
+                    Console.WriteLine($"Date Event: {f.DateEvent.ToShortDateString()}");
                     Console.WriteLine($"Init Hour Event: {f.HourInitEvent}");
                     Console.WriteLine($"End Hour Event: {f.HourEndEvent}");
                 });
@@ -216,7 +216,7 @@ namespace ConsoleTickets
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Sencuential Schedule: {e2.Secuential}");
-                    Console.WriteLine($"Date Schecule: {e2.DateEvent}");
+                    Console.WriteLine($"Date Schecule: {e2.DateEvent.ToShortDateString()}");
                     Console.WriteLine($"Init Hour Schedule: {e2.HourInitEvent}");
                     Console.WriteLine($"End Hour Schedule: {e2.HourEndEvent}");
                 });  

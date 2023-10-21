@@ -31,7 +31,7 @@ namespace ConsoleTickets
                 //[statement] Cada evento puede durar un máximo de 4 horas
                 //IsValidateSchedule = ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
                 IsValidateSchedule = itemSchedule.ValidateTimeHourSchedule(itemSchedule, valueMaxHour);
-                scheduleValidate.IsValidPeriodDays = IsValidateSchedule;
+                scheduleValidate.IsValidateTimeHour = IsValidateSchedule;
 
                 //[statement] no se pueden tener más de dos eventos el mismo día (evaluando contra la misma programacion del evento)
                 //IsValidateSchedule = ValidateConcurrenceIntoDayScheduleEvent(itemSchedule, lSchedule);
@@ -100,7 +100,7 @@ namespace ConsoleTickets
                 }
 
             });
-
+            ValidSchedule = noValidSchedule.Count != 0 ? false: true;
             return ValidSchedule;
         }
     }
