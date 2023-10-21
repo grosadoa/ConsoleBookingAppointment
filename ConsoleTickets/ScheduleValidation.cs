@@ -67,33 +67,33 @@ namespace ConsoleTickets
             {
                 Console.WriteLine();
                 Console.WriteLine($"{ShortNameEvent}\t{itemSchedule.InfoSchedule.DateEvent}\t{itemSchedule.InfoSchedule.HourInitEvent}\t{itemSchedule.InfoSchedule.HourEndEvent}");
-                if (itemSchedule.IsValidPeriodDays)
+                if (!itemSchedule.IsValidPeriodDays)
                 {
                     Console.WriteLine($"* Period Day is Invalid. Recomneded Date Event Between {valueMinDays} Days and {valueMaxDays} Days");
                 }
                 
-                if (itemSchedule.IsValidateTimeHour)
+                if (!itemSchedule.IsValidateTimeHour)
                 {
                     Console.WriteLine($"* Period Time is Invalid. Recomneded Hour Event Have max {valueMaxHour} Hour");
                 }
                 
-                if (itemSchedule.IsValidateConcurrenceIntoDay)
+                if (!itemSchedule.IsValidateConcurrenceIntoDay)
                 {
                     Console.WriteLine($"* Validate Date, In this event exists conflict Date. Recomneded update Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()}");
                 }
                 
-                if (itemSchedule.IsValidateConcurrenceIntoDayGlobal)
+                if (!itemSchedule.IsValidateConcurrenceIntoDayGlobal)
                 {
                     Console.WriteLine($"* Validate Date, In other event exists conflict Date. Recomneded update Date Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} ");
                 }
                 
-                if (itemSchedule.IsValidateConcurrenceIntoHour)
+                if (!itemSchedule.IsValidateConcurrenceIntoHour)
                 {
                     Console.WriteLine($"* Validate Date and Hour, In this event exists conflict Date. Recomneded update Date and Hour Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} " +
                         $"- Hour ({itemSchedule.InfoSchedule.HourInitEvent}-{itemSchedule.InfoSchedule.HourEndEvent})");
                 }
                 
-                if (itemSchedule.IsValidateConcurrenceIntoHourGlobal)
+                if (!itemSchedule.IsValidateConcurrenceIntoHourGlobal)
                 {
                     Console.WriteLine($"* Validate Date and Hour, In other event exists conflict Date. Recomneded update Date and Hour Differente {itemSchedule.InfoSchedule.DateEvent.ToShortDateString()} " +
                         $"- Hour ({itemSchedule.InfoSchedule.HourInitEvent}-{itemSchedule.InfoSchedule.HourEndEvent})");
