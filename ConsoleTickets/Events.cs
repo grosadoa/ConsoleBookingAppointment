@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleTickets
 {
-    public class Events
+    public class Events 
     {
         public string ShortNameEvent { get; set; }
         public string FullNameEvent { get; set; }
@@ -15,7 +16,7 @@ namespace ConsoleTickets
         public List<PriceByTicket> lPriceByTickets { get; set; } = new List<PriceByTicket>();
     }
 
-    public class Schedule
+    public class Schedule : ScheduleValidateProcess
     {
         public int Secuential { get; set; }
         public DateTime DateEvent { get; set; }
@@ -61,7 +62,6 @@ namespace ConsoleTickets
     public class ScheduleGlobalValidate : Schedule
     {
         public string ShortNameEvent { get; set; }
-        //public List<Schedule> lSchedule { get; set; } = new List<Schedule>();
     }
 
 }

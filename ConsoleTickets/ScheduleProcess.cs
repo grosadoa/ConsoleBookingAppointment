@@ -8,7 +8,54 @@ namespace ConsoleTickets
 {
     public class ScheduleProcess
     {
-        public void CreateSchedule(ref List<Schedule> lSchedule, string NameEvent)
+        public static void ManageScheduleMenu( ref List<Schedule> lSchedule, string NameEvent)
+        {
+            bool TryMenuSchedule = default;
+            do
+            {
+                TryMenuSchedule = true;
+                Console.WriteLine("1. Create Schedule");
+                Console.WriteLine("2. List Schedule");
+                Console.WriteLine("3. Modified Schedule");
+                Console.WriteLine("4. Delete Schedule");
+                Console.WriteLine("5. Continue...");
+
+                Console.Write("Select an option: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int choice))
+                {
+                    ScheduleProcess scheduleProcess = default;
+                    switch (choice)
+                    {
+                        case 1:
+                            CreateSchedule(ref lSchedule, NameEvent);
+                            break;
+                        case 2:
+                            //scheduleProcess = new ScheduleProcess();
+                            //scheduleProcess.ListSchedule(lSchedule, NameEvent);
+                            break;
+                        case 3:
+                            //scheduleProcess = new ScheduleProcess();
+                            //scheduleProcess.ModifiedSchedule(lSchedule, NameEvent);
+                            break;
+                        case 4:
+                            //scheduleProcess = new ScheduleProcess();
+                            //scheduleProcess.DeleteSchedule(lSchedule, NameEvent);
+                            break;
+                        case 5:
+                            Console.WriteLine("Exiting the program.");
+                            TryMenuSchedule = false;
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            } while (TryMenuSchedule);
+        }
+
+        private static void CreateSchedule(ref List<Schedule> lSchedule, string NameEvent)
         {
             Console.WriteLine($"You have selected the Create Schedule option.({NameEvent})");
             Console.WriteLine();
@@ -31,17 +78,17 @@ namespace ConsoleTickets
             lSchedule.Add(dataSchedule);
         }
 
-        public void DeleteSchedule(List<Schedule> lSchedule, string? shortNameEvent)
+        private static void DeleteSchedule(List<Schedule> lSchedule, string? shortNameEvent)
         {
             throw new NotImplementedException();
         }
 
-        public void ListSchedule(List<Schedule> lSchedule, string? shortNameEvent)
+        private static void ListSchedule(List<Schedule> lSchedule, string? shortNameEvent)
         {
             throw new NotImplementedException();
         }
 
-        public void ModifiedSchedule(List<Schedule> lSchedule, string? shortNameEvent)
+        private static void ModifiedSchedule(List<Schedule> lSchedule, string? shortNameEvent)
         {
             throw new NotImplementedException();
         }

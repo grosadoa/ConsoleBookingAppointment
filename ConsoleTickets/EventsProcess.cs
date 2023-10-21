@@ -60,7 +60,6 @@ namespace ConsoleTickets
             }
 
             IsValidateSchedule = ScheduleValidation.ExecuteValidateSchedule(dataEvent.ShortNameEvent,dataEvent.lSchedule, scheduleGlobals);
-            // RepositorySystem.lEvents
 
             if (IsValidateSchedule)
             {
@@ -90,7 +89,6 @@ namespace ConsoleTickets
                 }
             }
             
-            
             dataEvent.lPriceByTickets.ForEach(f => 
             {
                 Console.WriteLine();
@@ -98,8 +96,6 @@ namespace ConsoleTickets
                 Console.WriteLine($"Price Ticket: {f.PriceTicket}");
                 Console.WriteLine($"TicketType Event: {f.ETypeTicket}");
             });
-
-            
 
             Console.WriteLine();
             
@@ -134,16 +130,8 @@ namespace ConsoleTickets
                     Console.WriteLine("Should modified data event?[Yes/No]: ");
                     inputDataUser = Console.ReadLine();
 
-                    if (inputDataUser == "Yes")
-                    {
-                        QuestionContinueEvent = true;
-                        
-                    }
-                    else
-                    {
-                        QuestionContinueEvent = false;
-
-                    }
+                    QuestionContinueEvent = inputDataUser == "Yes" ? true : false;
+                    
                 }
 
                 if (QuestionContinueEvent)
@@ -157,55 +145,8 @@ namespace ConsoleTickets
                     dataEvent.FullNameEvent = inputDataUser;
                 }
 
-                
-
-                bool TryMenuSchedule = default;
-                do
-                {
-                    TryMenuSchedule = true;
-                    Console.WriteLine("1. Create Schedule");
-                    Console.WriteLine("2. List Schedule");
-                    Console.WriteLine("3. Modified Schedule");
-                    Console.WriteLine("4. Delete Schedule");
-                    Console.WriteLine("5. Continue...");
-
-                    Console.Write("Select an option: ");
-                    string input = Console.ReadLine();
-
-                    if (int.TryParse(input, out int choice))
-                    {
-                        ScheduleProcess scheduleProcess = default;
-                        switch (choice)
-                        {
-                            case 1:
-                                scheduleProcess = new ScheduleProcess();
-                                var dataSchedule = dataEvent.lSchedule;
-                                scheduleProcess.CreateSchedule(ref dataSchedule, dataEvent.ShortNameEvent);
-                                break;
-                            case 2:
-                                scheduleProcess = new ScheduleProcess();
-                                scheduleProcess.ListSchedule(dataEvent.lSchedule, dataEvent.ShortNameEvent);
-                                break;
-                            case 3:
-                                scheduleProcess = new ScheduleProcess();
-                                scheduleProcess.ModifiedSchedule(dataEvent.lSchedule, dataEvent.ShortNameEvent);
-                                break;
-                            case 4:
-                                scheduleProcess = new ScheduleProcess();
-                                scheduleProcess.DeleteSchedule(dataEvent.lSchedule, dataEvent.ShortNameEvent);
-                                break;
-                            case 5:
-                                Console.WriteLine("Exiting the program.");
-                                TryMenuSchedule = false;
-                                break;
-
-                            default:
-                                break;
-                        }
-                    }
-                } while (TryMenuSchedule);
-
-
+                List<Schedule> dataSchedule = dataEvent.lSchedule;
+                ScheduleProcess.ManageScheduleMenu(ref dataSchedule, dataEvent.ShortNameEvent);
 
                 PriceByTicketProcess priceByTicketProcess = new PriceByTicketProcess();
                 bool TryMenuPriceByTicket = true;
