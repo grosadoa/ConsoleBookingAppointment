@@ -153,12 +153,13 @@ namespace ConsoleTickets
 
                 do
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Price by Ticket Menu");
                     Console.WriteLine("1. Create Price-Ticket");
                     Console.WriteLine("2. List Price-Ticket");
                     Console.WriteLine("3. Modify Price-Ticket");
                     Console.WriteLine("4. Delete Price-Ticket");
-                    Console.WriteLine("5. Exit");
+                    Console.WriteLine("5. Continue");
 
                     Console.Write("Select an option: ");
                     if (int.TryParse(Console.ReadLine(), out int choice))

@@ -68,7 +68,7 @@ namespace ConsoleTickets
         {
             bool IsValidatePeriodDaySchedule = default;
 
-            int TotalDiffDay = int.Parse($"{(dataSchedule.DateEvent - DateTime.Now).TotalDays}");
+            int TotalDiffDay = int.Parse($"{Math.Truncate((dataSchedule.DateEvent - DateTime.Now).TotalDays)}");
 
             if (minDays > TotalDiffDay && TotalDiffDay < maxDays)
             {
