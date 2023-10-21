@@ -44,15 +44,15 @@ namespace ConsoleTickets
                 return;
             }
 
-           /* if (PriceByTicketValidation.IsValidPrice(dataPriceByTicket, lPriceByTickets))
-            {*/
+            if (PriceByTicketValidation.IsValidPrice(dataPriceByTicket, lPriceByTickets))
+            {
                 lPriceByTickets.Add(dataPriceByTicket);
                 Console.WriteLine($"Price Ticket added successfully for event {shortNameEvent}.");
-            /*}
+            }
             else
             {
                 Console.WriteLine("Error: Invalid Price Ticket. It doesn't meet the required conditions.");
-            }*/
+            }
         }
 
         public void DeletePriceByTicket(List<PriceByTicket> lPriceByTickets, string? shortNameEvent, TypeTicket typeToDelete)
