@@ -9,7 +9,7 @@ namespace ConsoleTickets
 {
     public class ScheduleProcess
     {
-        public static void ManageScheduleMenu( ref List<Schedule> lSchedule, string NameEvent)
+        public static void ManageScheduleMenu(ref List<Schedule> lSchedule, string NameEvent)
         {
             bool TryMenuSchedule = default;
             do
@@ -72,7 +72,7 @@ namespace ConsoleTickets
             Console.WriteLine("Please enter the Hour Init: ");
             inputDataUser = Console.ReadLine();
             dataSchedule.HourInitEvent = TimeSpan.Parse(inputDataUser);
-            
+
             Console.WriteLine("Please enter the Hour End: ");
             inputDataUser = Console.ReadLine();
             dataSchedule.HourEndEvent = TimeSpan.Parse(inputDataUser);
@@ -89,7 +89,7 @@ namespace ConsoleTickets
 
         private static void ListSchedule(List<Schedule> lSchedule, string? shortNameEvent)
         {
-            lSchedule.ForEach(l => 
+            lSchedule.ForEach(l =>
             {
                 Console.WriteLine();
                 Console.WriteLine($"Secuential Schedule : {l.Secuential}");

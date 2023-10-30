@@ -1,4 +1,5 @@
 ﻿using BussinessTickets;
+using ConsoleTickets.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ConsoleTickets
 {
     public class EventsProcess
     {
-        
+
         public void CreateEvent()
         {
             Console.WriteLine("You have selected the Create Event option.");
@@ -21,7 +22,7 @@ namespace ConsoleTickets
             dataEvent = CreateEventData(dataEvent);
             string inputDataUser = default;
 
-            if (String.IsNullOrEmpty(dataEvent.ShortNameEvent) || String.IsNullOrEmpty(dataEvent.FullNameEvent))
+            if (string.IsNullOrEmpty(dataEvent.ShortNameEvent) || string.IsNullOrEmpty(dataEvent.FullNameEvent))
             {
                 Console.WriteLine();
 
@@ -60,7 +61,7 @@ namespace ConsoleTickets
                 scheduleGlobals.AddRange(scheduleGlobalValidate);
             }
 
-            IsValidateSchedule = ScheduleValidation.ExecuteValidateSchedule(dataEvent.ShortNameEvent,dataEvent.lSchedule, scheduleGlobals);
+            IsValidateSchedule = ScheduleValidation.ExecuteValidateSchedule(dataEvent.ShortNameEvent, dataEvent.lSchedule, scheduleGlobals);
 
             if (IsValidateSchedule)
             {
@@ -89,8 +90,8 @@ namespace ConsoleTickets
                     return;
                 }
             }
-            
-            dataEvent.lPriceByTickets.ForEach(f => 
+
+            dataEvent.lPriceByTickets.ForEach(f =>
             {
                 Console.WriteLine();
                 Console.WriteLine($"Secuential: {f.Secuential}");
@@ -99,7 +100,7 @@ namespace ConsoleTickets
             });
 
             Console.WriteLine();
-            
+
             Console.WriteLine("Are you sure you want to create[Yes/No/Modify]: ");
             inputDataUser = Console.ReadLine();
 
@@ -108,7 +109,7 @@ namespace ConsoleTickets
                 RepositorySystem.lEvents.Add(dataEvent);
                 Console.WriteLine("successful create");
             }
-            else if(inputDataUser == "Modify")
+            else if (inputDataUser == "Modify")
             {
                 dataEvent = CreateEventData(dataEvent);
                 RepositorySystem.lEvents.Add(dataEvent);
@@ -122,7 +123,7 @@ namespace ConsoleTickets
             {
                 string inputDataUser = default;
                 bool QuestionContinueEvent = false;
-                if (String.IsNullOrEmpty(dataEvent.ShortNameEvent))
+                if (string.IsNullOrEmpty(dataEvent.ShortNameEvent))
                 {
                     QuestionContinueEvent = true;
                 }
@@ -132,7 +133,7 @@ namespace ConsoleTickets
                     inputDataUser = Console.ReadLine();
 
                     QuestionContinueEvent = inputDataUser == "Yes" ? true : false;
-                    
+
                 }
 
                 if (QuestionContinueEvent)
@@ -198,7 +199,7 @@ namespace ConsoleTickets
                 } while (TryMenuPriceByTicket);
 
                 return dataEvent;
-            } 
+            }
 
         }
 
@@ -207,22 +208,22 @@ namespace ConsoleTickets
             Console.WriteLine("You have selected the Create List Event option.");
             Console.WriteLine();
 
-            RepositorySystem.lEvents.ForEach(e => 
+            RepositorySystem.lEvents.ForEach(e =>
             {
                 Console.WriteLine();
                 Console.WriteLine($"Short Name Event: {e.ShortNameEvent}");
                 Console.WriteLine($"Full Name Event: {e.FullNameEvent}");
 
-                e.lSchedule.ForEach(e2 => 
+                e.lSchedule.ForEach(e2 =>
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Sencuential Schedule: {e2.Secuential}");
                     Console.WriteLine($"Date Schecule: {e2.DateEvent.ToShortDateString()}");
                     Console.WriteLine($"Init Hour Schedule: {e2.HourInitEvent}");
                     Console.WriteLine($"End Hour Schedule: {e2.HourEndEvent}");
-                });  
-                
-                e.lPriceByTickets.ForEach(e3 => 
+                });
+
+                e.lPriceByTickets.ForEach(e3 =>
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Sencuential Price By Ticket: {e3.Secuential}");
@@ -233,16 +234,16 @@ namespace ConsoleTickets
                     switch (e3.ETypeTicket)
                     {
                         case TypeTicket.General:
-                            nameTicket = Constants.NameTypeTickets.TicketGeneral;
+                            nameTicket = Constantes.NameTypeTickets.TicketGeneral;
                             break;
                         case TypeTicket.Tribuna:
-                            nameTicket = Constants.NameTypeTickets.TicketTribuna;
+                            nameTicket = Constantes.NameTypeTickets.TicketTribuna;
                             break;
                         case TypeTicket.Piso:
-                            nameTicket = Constants.NameTypeTickets.TicketPiso;
+                            nameTicket = Constantes.NameTypeTickets.TicketPiso;
                             break;
                         case TypeTicket.VIP:
-                            nameTicket = Constants.NameTypeTickets.TicketVIP;
+                            nameTicket = Constantes.NameTypeTickets.TicketVIP;
                             break;
                         default:
                             break;
@@ -302,17 +303,17 @@ namespace ConsoleTickets
             Console.WriteLine("Are you sure you want to delete[Yes/No]: ");
             inputDataUser = Console.ReadLine();
 
-            if(inputDataUser == "Yes")
+            if (inputDataUser == "Yes")
             {
                 int countDeleteEvent = default;
                 countDeleteEvent = RepositorySystem.lEvents.RemoveAll(r => r.ShortNameEvent == dataEvent.ShortNameEvent);
 
-                if(countDeleteEvent  != 0)
+                if (countDeleteEvent != 0)
                 {
                     Console.WriteLine("successful removal");
                 }
             }
-            
+
         }
 
         public void ModifiedEvent()
