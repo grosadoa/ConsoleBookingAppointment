@@ -8,7 +8,7 @@ public class Program
         string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
         List<SegmentoArchivo> listaSegmentoArchivo = new List<SegmentoArchivo>();
         SegmentoArchivo segmentoArchivoActual = null;
-
+        List<DatosMedico> datosMedico = new List<DatosMedico>();
         foreach (string linea in LineaArchivo)
         {
 
@@ -49,6 +49,24 @@ public class Program
                     {
                         segmentoArchivoActual.DatosPaciente.Add(datoCitaAnterior);
                     }
+
+                    DatosMedico datoMedico = new DatosMedico
+                    {
+                        Tipo = valorLinea[1],
+                        Especialidad = valorLinea[2],
+                        Nombre = valorLinea[3]
+                    };
+
+                    if (datoMedico != null)
+                    {
+                        bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedico.Nombre));
+
+                        if (!existe)
+                        {
+                            datosMedico.Add(datoMedico);
+                        }
+                    }
+
                 }
                 else
                 {
@@ -68,6 +86,13 @@ public class Program
 
                     datoCitaNueva.Edad = UtilidadFechas.calcularEdad(valorLinea[9]);
 
+                    DatosMedico datoMedico = new DatosMedico
+                    {
+                        Tipo = valorLinea[1],
+                        Especialidad = valorLinea[2],
+                        Nombre = valorLinea[3]
+                    };
+
                     if (valorLinea[5].Trim() == "PMENOR" && valorLinea.Length >= 13)
                     {
                         datoCitaNueva.Apoderado = new DatosApoderado
@@ -84,6 +109,24 @@ public class Program
                     {
                         segmentoArchivoActual.NuevasCitas.Add(datoCitaNueva);
                     }
+
+                    DatosMedico datoMedicoCitaNueva = new DatosMedico
+                    {
+                        Tipo = valorLinea[1],
+                        Especialidad = valorLinea[2],
+                        Nombre = valorLinea[3]
+                    };
+
+                    if (datoMedico != null)
+                    {
+                        bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedicoCitaNueva.Nombre));
+
+                        if (!existe)
+                        {
+                            datosMedico.Add(datoMedico);
+                        }
+                    }
+
                 }
             }
             else
@@ -96,6 +139,8 @@ public class Program
                 };
                 listaSegmentoArchivo.Add(segmentoArchivoActual);
             }
+
+
         }
 
 
@@ -105,12 +150,20 @@ public class Program
             {
                 ProgramHelpers.ImprimirListadoCitas(datoSeleccionado);
             }
-            if (datoSeleccionado.NuevasCitas.Count>0)
+            if (datoSeleccionado.NuevasCitas.Count > 0)
             {
                 ProgramHelpers.ImprimirCitasNuevas(datoSeleccionado.NuevasCitas);
             }
         }
     }
+
+
+    public void LecturaCitasAnteriores(){
+        
+        
+       }
+
+
 }
 
 

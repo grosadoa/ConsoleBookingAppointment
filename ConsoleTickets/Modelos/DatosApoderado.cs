@@ -35,6 +35,5 @@ namespace ConsoleTickets.Models
         }
         public string Documento { get; set; }
         public string FechaNacimiento { get; set; }
-        // Agregar más campos del apoderado si es necesario
     }
 }
