@@ -39,7 +39,7 @@ internal static class ProgramHelpers
         foreach (var nuevacita in listaCitas)
         {
             Console.WriteLine();
-            Console.WriteLine($"Fecha: {nuevacita.Hora}");
+            Console.WriteLine($"Fecha: {nuevacita.FechaCita}");
             Console.WriteLine($"Hora: {nuevacita.Hora}");
             Console.WriteLine($"Tipo: {nuevacita.Tipo}");
             Console.WriteLine($"Especialidad: {nuevacita.Especialidad}");

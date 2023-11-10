@@ -10,7 +10,7 @@ namespace ConsoleBookingAppointment.Utils
     {
 
         public static string RutaArchivo = "\\med_input.txt";
-        public static string IdentificadorSeccionNuevasCitas = "NUEVA LINEA";
+        public static string IdentificadorSeccionNuevasCitas = "NUEVA CITA";
         public static int SeccionActualRegistrados = 1;
         public static int SeccionActualNuevosCitas = 2;
 

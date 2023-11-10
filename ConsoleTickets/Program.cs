@@ -8,7 +8,6 @@ public class Program
         // Lectura de archivo
         string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
 
-        //List<SegmentoArchivo> listaSegmentoArchivo = new List<SegmentoArchivo>();
         SegmentoArchivo dataSegmentoArchivo = new SegmentoArchivo();
         List<DatosMedico> datosMedico = new List<DatosMedico>();
         List<DatosReservaCitas> datosReservasCitasRegistrado = new List<DatosReservaCitas>();
@@ -20,13 +19,15 @@ public class Program
             if (linea.Contains(Constantes.IdentificadorSeccionNuevasCitas))
             {
                 SectionActualFile = Constantes.SeccionActualNuevosCitas;
+                continue;
             }
-            
 
             string[] valorLinea = linea.Split('|');
-            if (valorLinea.Length > 1)
+            
+            //if (valorLinea[4].Trim() == "ADULTO" || valorLinea[4].Trim() == "PMENOR")
+            if (SectionActualFile == Constantes.SeccionActualRegistrados)
             {
-                if (valorLinea[4].Trim() == "ADULTO" || valorLinea[4].Trim() == "PMENOR")
+                if (valorLinea.Length > 1)
                 {
                     DatosReservaCitas datoCitaAnterior = new DatosReservaCitas
                     {
@@ -44,7 +45,6 @@ public class Program
 
                     datoCitaAnterior.Edad = UtilidadFechas.calcularEdad(valorLinea[8]);
 
-
                     if (valorLinea[4].Trim() == "PMENOR" && valorLinea.Length >= 13)
                     {
                         datoCitaAnterior.Apoderado = new DatosApoderado
@@ -60,7 +60,6 @@ public class Program
                     if (dataSegmentoArchivo != null)
                     {
                         datosReservasCitasRegistrado.Add(datoCitaAnterior);
-                        //segmentoArchivoActual.DatosReservasCitasRegistrado.Add(datoCitaAnterior);
                     }
 
                     DatosMedico datoMedico = new DatosMedico
@@ -79,100 +78,78 @@ public class Program
                             datosMedico.Add(datoMedico);
                         }
                     }
-
                 }
                 else
                 {
-                    DatosReservaCitas datoCitaNueva = new DatosReservaCitas
-                    {
-                        FechaCita = valorLinea[0],
-                        Hora = valorLinea[1],
-                        Tipo = valorLinea[2],
-                        Especialidad = valorLinea[3],
-                        Nombre = valorLinea[4],
-                        TipoDocumento = valorLinea[6],
-                        Documento = valorLinea[7],
-                        Telefono = valorLinea[8],
-                        FechaNacimiento = valorLinea[9],
-                        Edad = ""
-                    };
-
-                    datoCitaNueva.Edad = UtilidadFechas.calcularEdad(valorLinea[9]);
-
-                    DatosMedico datoMedico = new DatosMedico
-                    {
-                        Tipo = valorLinea[1],
-                        Especialidad = valorLinea[2],
-                        Nombre = valorLinea[3]
-                    };
-
-                    if (valorLinea[5].Trim() == "PMENOR" && valorLinea.Length >= 13)
-                    {
-                        datoCitaNueva.Apoderado = new DatosApoderado
-                        {
-                            Tipo = valorLinea[10],
-                            Nombre = valorLinea[11],
-                            TipoDocumento = valorLinea[12],
-                            Documento = valorLinea[13],
-                            FechaNacimiento = valorLinea[14]
-                        };
-                    }
-
-                    if (dataSegmentoArchivo != null)
-                    {
-                        datosReservasCitasNuevas.Add(datoCitaNueva);
-                        //segmentoArchivoActual.DatosReservasCitasNuevas.Add(datoCitaNueva);
-                    }
-
-                    DatosMedico datoMedicoCitaNueva = new DatosMedico
-                    {
-                        Tipo = valorLinea[1],
-                        Especialidad = valorLinea[2],
-                        Nombre = valorLinea[3]
-                    };
-
-                    if (datoMedico != null)
-                    {
-                        bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedicoCitaNueva.Nombre));
-
-                        if (!existe)
-                        {
-                            datosMedico.Add(datoMedico);
-                        }
-                    }
-
+                    FechaCitasActual = valorLinea[0];
                 }
             }
             else
             {
-                FechaCitasActual = valorLinea[0];
-                //dataSegmentoArchivo = new SegmentoArchivo
-                //{
-                //    Fecha = valorLinea[0],
-                //    DatosReservasCitasRegistrado = new List<DatosReservaCitas>(),
-                //    DatosReservasCitasNuevas = new List<DatosReservaCitas>()
-                //};
-                //listaSegmentoArchivo.Add(segmentoArchivoActual);
+                DatosReservaCitas datoCitaNueva = new DatosReservaCitas
+                {
+                    FechaCita = valorLinea[0],
+                    Hora = valorLinea[1],
+                    Tipo = valorLinea[2],
+                    Especialidad = valorLinea[3],
+                    Nombre = valorLinea[4],
+                    TipoDocumento = valorLinea[6],
+                    Documento = valorLinea[7],
+                    Telefono = valorLinea[8],
+                    FechaNacimiento = valorLinea[9],
+                    Edad = ""
+                };
+
+                datoCitaNueva.Edad = UtilidadFechas.calcularEdad(valorLinea[9]);
+
+                DatosMedico datoMedico = new DatosMedico
+                {
+                    Tipo = valorLinea[1],
+                    Especialidad = valorLinea[2],
+                    Nombre = valorLinea[3]
+                };
+
+                if (valorLinea[5].Trim() == "PMENOR" && valorLinea.Length >= 13)
+                {
+                    datoCitaNueva.Apoderado = new DatosApoderado
+                    {
+                        Tipo = valorLinea[10],
+                        Nombre = valorLinea[11],
+                        TipoDocumento = valorLinea[12],
+                        Documento = valorLinea[13],
+                        FechaNacimiento = valorLinea[14]
+                    };
+                }
+
+                if (dataSegmentoArchivo != null)
+                {
+                    datosReservasCitasNuevas.Add(datoCitaNueva);
+                }
+
+                DatosMedico datoMedicoCitaNueva = new DatosMedico
+                {
+                    Tipo = valorLinea[1],
+                    Especialidad = valorLinea[2],
+                    Nombre = valorLinea[3]
+                };
+
+                if (datoMedico != null)
+                {
+                    bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedicoCitaNueva.Nombre));
+
+                    if (!existe)
+                    {
+                        datosMedico.Add(datoMedico);
+                    }
+                }
+
             }
-
-
         }
         dataSegmentoArchivo.DatosReservasCitasRegistrado = datosReservasCitasRegistrado;
         dataSegmentoArchivo.DatosReservasCitasNuevas = datosReservasCitasNuevas;
 
         ProgramHelpers.ImprimirListadoCitas(dataSegmentoArchivo.DatosReservasCitasRegistrado);
         ProgramHelpers.ImprimirCitasNuevas(dataSegmentoArchivo.DatosReservasCitasNuevas);
-        //foreach (var datoSeleccionado in segmentoArchivoActual.)
-        //{
-        //    if (datoSeleccionado.DatosPaciente.Count > 0)
-        //    {
-        //        ProgramHelpers.ImprimirListadoCitas(datoSeleccionado);
-        //    }
-        //    if (datoSeleccionado.NuevasCitas.Count > 0)
-        //    {
-        //        ProgramHelpers.ImprimirCitasNuevas(segmentoArchivoActual.NuevasCitas);
-        //    }
-        //}
     }
 
 
