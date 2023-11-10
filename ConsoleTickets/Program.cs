@@ -1,4 +1,5 @@
-﻿using ConsoleBookingAppointment.Models;
+﻿using ConsoleBookingAppointment.Modelos;
+using ConsoleBookingAppointment.Models;
 using ConsoleBookingAppointment.Utils;
 
 public class Program
@@ -6,149 +7,147 @@ public class Program
     static void Main()
     {
         // Lectura de archivo
-        string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
+        //string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
+        string[] FileLine = File.ReadAllLines(Constants.FilePath1);
 
-        SegmentoArchivo dataSegmentoArchivo = new SegmentoArchivo();
-        List<DatosMedico> datosMedico = new List<DatosMedico>();
-        List<DatosReservaCitas> datosReservasCitasRegistrado = new List<DatosReservaCitas>();
-        List<DatosReservaCitas> datosReservasCitasNuevas = new List<DatosReservaCitas>();
-        int SectionActualFile = Constantes.SeccionActualRegistrados;
-        string FechaCitasActual = String.Empty;
-        foreach (string linea in LineaArchivo)
+        FileSegment dataFileSegment = new FileSegment();
+        List<Doctor> dataDoctors = new List<Doctor>();
+        List<BookingAppointment> dataReservationsAppointmentsRegistered = new List<BookingAppointment>();
+        List<BookingAppointment> dataReservationsAppointmentsNew = new List<BookingAppointment>();
+        int sectionFileSegment = Constants.CurrentRegisteredSection;
+        string dateCurrentAppointments = String.Empty;
+        foreach (string line in FileLine)
         {
-            if (linea.Contains(Constantes.IdentificadorSeccionNuevasCitas))
+            if (line.Contains(Constants.NewAppointmentsSectionIdentifier))
             {
-                SectionActualFile = Constantes.SeccionActualNuevosCitas;
+                sectionFileSegment = Constants.CurrentSectionNewAppointments;
                 continue;
             }
 
-            string[] valorLinea = linea.Split('|');
+            string[] lineValue = line.Split('|');
             
-            if (SectionActualFile == Constantes.SeccionActualRegistrados)
+            if (sectionFileSegment == Constants.CurrentRegisteredSection)
             {
-                if (valorLinea.Length > 1)
+                if (lineValue.Length > 1)
                 {
-                    DatosReservaCitas datoCitaAnterior = new DatosReservaCitas
+                    BookingAppointment dataPreviousAppointment = new BookingAppointment
                     {
-                        FechaCita = FechaCitasActual,
-                        Hora = valorLinea[0],
-                        Tipo = valorLinea[1],
-                        Especialidad = valorLinea[2],
-                        Nombre = valorLinea[3],
-                        TipoDocumento = valorLinea[5],
-                        Documento = valorLinea[6],
-                        Telefono = valorLinea[7],
-                        FechaNacimiento = valorLinea[8],
-                        Edad = ""
+                        DateAppointments = dateCurrentAppointments,
+                        Hour = lineValue[0]
+                        
                     };
 
-                    datoCitaAnterior.Edad = UtilidadFechas.calcularEdad(valorLinea[8]);
-
-                    if (valorLinea[4].Trim() == "PMENOR" && valorLinea.Length >= 13)
+                    dataPreviousAppointment.Doctor = new Doctor
                     {
-                        datoCitaAnterior.Apoderado = new DatosApoderado
+                        SpecialtyType = lineValue[1],
+                        Specialty = lineValue[2],
+                        Name = lineValue[3]
+                    };
+
+                    dataPreviousAppointment.Patient = new Patient
+                    {
+                        DocumentType = lineValue[5],
+                        Document = lineValue[6],
+                        Phone = lineValue[7],
+                        Birthdate = lineValue[8],
+                        Age = ""
+                    };
+
+                    dataPreviousAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[8]);
+
+                    if (lineValue[4].Trim() == "PMENOR" && lineValue.Length >= 13)
+                    {
+                        dataPreviousAppointment.MedicalRepresentative = new MedicalRepresentative
                         {
-                            Tipo = valorLinea[9],
-                            Nombre = valorLinea[10],
-                            TipoDocumento = valorLinea[11],
-                            Documento = valorLinea[12],
-                            FechaNacimiento = valorLinea[13]
+                            Name = lineValue[10],
+                            DocumentType = lineValue[11],
+                            Document = lineValue[12],
+                            Birthdate = lineValue[13]
                         };
                     }
 
-                    if (dataSegmentoArchivo != null)
+                    if (dataFileSegment != null)
                     {
-                        datosReservasCitasRegistrado.Add(datoCitaAnterior);
+                        dataReservationsAppointmentsRegistered.Add(dataPreviousAppointment);
                     }
 
-                    DatosMedico datoMedico = new DatosMedico
-                    {
-                        Tipo = valorLinea[1],
-                        Especialidad = valorLinea[2],
-                        Nombre = valorLinea[3]
-                    };
 
-                    if (datoMedico != null)
+                    if (dataPreviousAppointment.Doctor != null)
                     {
-                        bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedico.Nombre));
+                        bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataPreviousAppointment.Doctor.Name));
 
-                        if (!existe)
+                        if (!exists)
                         {
-                            datosMedico.Add(datoMedico);
+                            dataDoctors.Add(dataPreviousAppointment.Doctor);
                         }
                     }
                 }
                 else
                 {
-                    FechaCitasActual = valorLinea[0];
+                    dateCurrentAppointments = lineValue[0];
                 }
             }
             else
             {
-                DatosReservaCitas datoCitaNueva = new DatosReservaCitas
+                BookingAppointment dataNewAppointment = new BookingAppointment
                 {
-                    FechaCita = valorLinea[0],
-                    Hora = valorLinea[1],
-                    Tipo = valorLinea[2],
-                    Especialidad = valorLinea[3],
-                    Nombre = valorLinea[4],
-                    TipoDocumento = valorLinea[6],
-                    Documento = valorLinea[7],
-                    Telefono = valorLinea[8],
-                    FechaNacimiento = valorLinea[9],
-                    Edad = ""
+                    DateAppointments = lineValue[0],
+                    Hour = lineValue[1]
                 };
 
-                datoCitaNueva.Edad = UtilidadFechas.calcularEdad(valorLinea[9]);
-
-                DatosMedico datoMedico = new DatosMedico
+                dataNewAppointment.Doctor = new Doctor
                 {
-                    Tipo = valorLinea[1],
-                    Especialidad = valorLinea[2],
-                    Nombre = valorLinea[3]
+                    SpecialtyType = lineValue[2],
+                    Specialty = lineValue[3],
+                    Name = lineValue[4]
                 };
 
-                if (valorLinea[5].Trim() == "PMENOR" && valorLinea.Length >= 13)
+                dataNewAppointment.Patient = new Patient
                 {
-                    datoCitaNueva.Apoderado = new DatosApoderado
+                    DocumentType = lineValue[6],
+                    Document = lineValue[7],
+                    Phone = lineValue[8],
+                    Birthdate = lineValue[9],
+                    Age = ""
+                };
+
+                dataNewAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[9]);
+
+
+                if (lineValue[5].Trim() == "PMENOR" && lineValue.Length >= 13)
+                {
+                    dataNewAppointment.MedicalRepresentative = new MedicalRepresentative
                     {
-                        Tipo = valorLinea[10],
-                        Nombre = valorLinea[11],
-                        TipoDocumento = valorLinea[12],
-                        Documento = valorLinea[13],
-                        FechaNacimiento = valorLinea[14]
+                        Name = lineValue[11],
+                        DocumentType = lineValue[12],
+                        Document = lineValue[13],
+                        Birthdate = lineValue[14]
                     };
                 }
 
-                if (dataSegmentoArchivo != null)
+                if (dataFileSegment != null)
                 {
-                    datosReservasCitasNuevas.Add(datoCitaNueva);
+                    dataReservationsAppointmentsNew.Add(dataNewAppointment);
                 }
 
-                DatosMedico datoMedicoCitaNueva = new DatosMedico
-                {
-                    Tipo = valorLinea[1],
-                    Especialidad = valorLinea[2],
-                    Nombre = valorLinea[3]
-                };
 
-                if (datoMedico != null)
+                if (dataNewAppointment.Doctor != null)
                 {
-                    bool existe = datosMedico.Any(objDatoMedico => objDatoMedico.Nombre.Equals(datoMedicoCitaNueva.Nombre));
+                    bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataNewAppointment.Doctor.Name));
 
-                    if (!existe)
+                    if (!exists)
                     {
-                        datosMedico.Add(datoMedico);
+                        dataDoctors.Add(dataNewAppointment.Doctor);
                     }
                 }
 
             }
         }
-        dataSegmentoArchivo.DatosReservasCitasRegistrado = datosReservasCitasRegistrado;
-        dataSegmentoArchivo.DatosReservasCitasNuevas = datosReservasCitasNuevas;
+        dataFileSegment.DataReservationsAppointmentsRegistered = dataReservationsAppointmentsRegistered;
+        dataFileSegment.DataReservationsAppointmentsNew = dataReservationsAppointmentsNew;
 
-        ProgramHelpers.ImprimirListadoCitas(dataSegmentoArchivo.DatosReservasCitasRegistrado);
-        ProgramHelpers.ImprimirCitasNuevas(dataSegmentoArchivo.DatosReservasCitasNuevas);
+        ProgramHelpers.PrintListAppointments(dataFileSegment.DataReservationsAppointmentsRegistered);
+        ProgramHelpers.PrintNewAppointment(dataFileSegment.DataReservationsAppointmentsNew);
     }
 
 

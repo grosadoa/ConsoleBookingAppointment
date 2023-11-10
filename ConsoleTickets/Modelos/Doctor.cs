@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleBookingAppointment.Models
 {
-    class DatosMedico
+    public class Doctor
     {
-        public string Tipo { get; set; }
-        public string Especialidad { get; set; }
-        public string Nombre { get; set; }
+        public string SpecialtyType { get; set; }
+        public string Specialty { get; set; }
+        public string Name { get; set; }
        
     }
 }

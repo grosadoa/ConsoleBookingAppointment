@@ -234,16 +234,16 @@ namespace ConsoleBookingAppointment
                     switch (e3.ETypeTicket)
                     {
                         case TypeTicket.General:
-                            nameTicket = Constantes.NameTypeTickets.TicketGeneral;
+                            nameTicket = Constants.NameTypeTickets.TicketGeneral;
                             break;
                         case TypeTicket.Tribuna:
-                            nameTicket = Constantes.NameTypeTickets.TicketTribuna;
+                            nameTicket = Constants.NameTypeTickets.TicketTribuna;
                             break;
                         case TypeTicket.Piso:
-                            nameTicket = Constantes.NameTypeTickets.TicketPiso;
+                            nameTicket = Constants.NameTypeTickets.TicketPiso;
                             break;
                         case TypeTicket.VIP:
-                            nameTicket = Constantes.NameTypeTickets.TicketVIP;
+                            nameTicket = Constants.NameTypeTickets.TicketVIP;
                             break;
                         default:
                             break;

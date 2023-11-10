@@ -6,34 +6,33 @@ using System.Threading.Tasks;
 
 namespace ConsoleBookingAppointment.Models
 {
-    public class DatosApoderado
+    public class MedicalRepresentative
     {
-        public string Tipo { get; set; }
-        public string Nombre { get; set; }
-        private string tipoDocumento;
-        public string TipoDocumento
+        public string Name { get; set; }
+        private string documentType;
+        public string DocumentType
         {
-            get { return tipoDocumento; }
+            get { return documentType; }
             set
             {
                 if (value.Trim() == "C")
                 {
-                    tipoDocumento = "CEDULA";
+                    documentType = "CEDULA";
                 }
                 else
                 {
                     if (value.Trim() == "P")
                     {
-                        tipoDocumento = "PASAPORTE";
+                        documentType = "PASAPORTE";
                     }
                     else
                     {
-                        tipoDocumento = value;
+                        documentType = value;
                     }
                 }
             }
         }
-        public string Documento { get; set; }
-        public string FechaNacimiento { get; set; }
+        public string Document { get; set; }
+        public string Birthdate { get; set; }
     }
 }

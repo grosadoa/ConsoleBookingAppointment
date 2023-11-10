@@ -3,25 +3,25 @@ using Microsoft.Win32;
 
 internal static class ProgramHelpers
 {
-    public static void ImprimirListadoCitas(List<DatosReservaCitas> listaCitas)
+    public static void PrintListAppointments(List<BookingAppointment> listAppointments)
     {
 
-        List<string> FechasCitas = listaCitas.GroupBy(g => g.FechaCita).Select(ss => ss.Key).ToList();
+        List<string> DateAppointments = listAppointments.GroupBy(g => g.DateAppointments).Select(ss => ss.Key).ToList();
 
-        FechasCitas.ForEach(f => 
+        DateAppointments.ForEach(f => 
         {
             Console.WriteLine($" Fecha: {f}                                                                                                               |  Apoderado ");
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------");
             Console.WriteLine("| Hora  |     Tipo     | Especialidad |        Nombre        |   Edad   | T.Documento |  Documento  |  Teléfono  | F. Nacimiento |        Nombre         | T.Documento |  Documento  | F. Nacimiento |");
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------");
 
-            foreach (var datoCita in listaCitas.Where(ww => ww.FechaCita == f))
+            foreach (var DataAppointments in listAppointments.Where(ww => ww.DateAppointments == f))
             {
-                string rowCita = $"| {datoCita.Hora} | {datoCita.Tipo} | {datoCita.Especialidad,-12} | {datoCita.Nombre} | {datoCita.Edad,-8} | {datoCita.TipoDocumento,-11} | {datoCita.Documento,-11} | {datoCita.Telefono,-10} | {datoCita.FechaNacimiento,-13} |";
+                string rowCita = $"| {DataAppointments.Hour} | {DataAppointments.Doctor.SpecialtyType} | {DataAppointments.Doctor.Specialty,-12} | {DataAppointments.Doctor.Name} | {DataAppointments.Patient.Age,-8} | {DataAppointments.Patient.DocumentType,-11} | {DataAppointments.Patient.Document,-11} | {DataAppointments.Patient.Phone,-10} | {DataAppointments.Patient.Birthdate,-13} |";
 
-                if (datoCita.Apoderado != null)
+                if (DataAppointments.MedicalRepresentative != null)
                 {
-                    rowCita = rowCita + $" {datoCita.Apoderado.Nombre}  | {datoCita.Apoderado.TipoDocumento,-11} | {datoCita.Apoderado.Documento,-11} | {datoCita.Apoderado.FechaNacimiento,-13} |";
+                    rowCita = rowCita + $" {DataAppointments.MedicalRepresentative.Name}  | {DataAppointments.MedicalRepresentative.DocumentType,-11} | {DataAppointments.MedicalRepresentative.Document,-11} | {DataAppointments.MedicalRepresentative.Birthdate,-13} |";
                 }
                 Console.WriteLine(rowCita);
             }
@@ -32,32 +32,32 @@ internal static class ProgramHelpers
     }
 
 
-    public static void ImprimirCitasNuevas(List<DatosReservaCitas> listaCitas)
+    public static void PrintNewAppointment(List<BookingAppointment> listAppointments)
     {
         Console.WriteLine();
         Console.WriteLine($"Nueva Cita");
-        foreach (var nuevacita in listaCitas)
+        foreach (var Appointment in listAppointments)
         {
             Console.WriteLine();
-            Console.WriteLine($"Fecha: {nuevacita.FechaCita}");
-            Console.WriteLine($"Hora: {nuevacita.Hora}");
-            Console.WriteLine($"Tipo: {nuevacita.Tipo}");
-            Console.WriteLine($"Especialidad: {nuevacita.Especialidad}");
-            Console.WriteLine($"Nombre: {nuevacita.Nombre}");
-            Console.WriteLine($"Edad: {nuevacita.Edad}");
-            Console.WriteLine($"T. Documento: {nuevacita.TipoDocumento}");
-            Console.WriteLine($"Documento: {nuevacita.Documento}");
-            Console.WriteLine($"Teléfono: {nuevacita.Telefono}");
-            Console.WriteLine($"F. Nacimiento: {nuevacita.FechaNacimiento}");
+            Console.WriteLine($"Fecha: {Appointment.DateAppointments}");
+            Console.WriteLine($"Hora: {Appointment.Hour}");
+            Console.WriteLine($"Tipo: {Appointment.Doctor.SpecialtyType}");
+            Console.WriteLine($"Especialidad: {Appointment.Doctor.Specialty}");
+            Console.WriteLine($"Nombre: {Appointment.Doctor.Name}");
+            Console.WriteLine($"Edad: {Appointment.Patient.Age}");
+            Console.WriteLine($"T. Documento: {Appointment.Patient.DocumentType}");
+            Console.WriteLine($"Documento: {Appointment.Patient.Document}");
+            Console.WriteLine($"Teléfono: {Appointment.Patient.Phone}");
+            Console.WriteLine($"F. Nacimiento: {Appointment.Patient.Birthdate}");
             
             Console.WriteLine();
-            if (nuevacita.Apoderado != null)
+            if (Appointment.MedicalRepresentative != null)
             {
                 Console.WriteLine("Datos del Apoderado:");
-                Console.WriteLine($"Nombre: {nuevacita.Apoderado.Nombre}");
-                Console.WriteLine($"Tipo Documento: {nuevacita.Apoderado.TipoDocumento}");
-                Console.WriteLine($"Documento: {nuevacita.Apoderado.Documento}");
-                Console.WriteLine($"F. Nacimiento: {nuevacita.Apoderado.FechaNacimiento}");
+                Console.WriteLine($"Nombre: {Appointment.MedicalRepresentative.Name}");
+                Console.WriteLine($"Tipo Documento: {Appointment.MedicalRepresentative.DocumentType}");
+                Console.WriteLine($"Documento: {Appointment.MedicalRepresentative.Document}");
+                Console.WriteLine($"F. Nacimiento: {Appointment.MedicalRepresentative.Birthdate}");
             }
 
         }

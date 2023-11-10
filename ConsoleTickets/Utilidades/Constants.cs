@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleBookingAppointment.Utils
 {
-    public class Constantes
+    public class Constants
     {
 
-        public static string RutaArchivo = "\\med_input.txt";
-        public static string IdentificadorSeccionNuevasCitas = "NUEVA CITA";
-        public static int SeccionActualRegistrados = 1;
-        public static int SeccionActualNuevosCitas = 2;
+        public static string FilePath = "\\med_input.txt";
+        public static string FilePath1 = "C:\\Users\\Rp3 Software\\Documents\\med_input.txt";
+        public static string NewAppointmentsSectionIdentifier = "NUEVA CITA";
+        public static int CurrentRegisteredSection = 1;
+        public static int CurrentSectionNewAppointments = 2;
 
         public class NameTypeTickets
         {
