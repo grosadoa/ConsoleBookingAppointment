@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTickets", "ConsoleTickets\ConsoleTickets.csproj", "{7A7DE1F9-9D05-40F2-80BE-2FE202EBE028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleBookingAppointment", "ConsoleTickets\ConsoleBookingAppointment.csproj", "{7A7DE1F9-9D05-40F2-80BE-2FE202EBE028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTickets", "TestTickets\TestTickets.csproj", "{E6A0D0FD-F700-47C2-8AC9-D103D6C75D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBookingAppointment", "TestTickets\TestBookingAppointment.csproj", "{E6A0D0FD-F700-47C2-8AC9-D103D6C75D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessTickets", "BussinessTickets\BussinessTickets.csproj", "{389DA702-6C9D-4233-8A94-6D240625D35A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BussinessBookingAppointment", "BussinessTickets\BussinessBookingAppointment.csproj", "{389DA702-6C9D-4233-8A94-6D240625D35A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

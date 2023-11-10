@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BussinessTickets\BussinessTickets.csproj" />
+    <ProjectReference Include="..\BussinessTickets\BussinessBookingAppointment.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resourses\med_input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

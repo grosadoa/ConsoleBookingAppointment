@@ -1,24 +1,36 @@
-﻿using ConsoleTickets.Models;
-using ConsoleTickets.Utils;
+﻿using ConsoleBookingAppointment.Models;
+using ConsoleBookingAppointment.Utils;
 
 public class Program
 {
     static void Main()
     {
+        // Lectura de archivo
         string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
-        List<SegmentoArchivo> listaSegmentoArchivo = new List<SegmentoArchivo>();
-        SegmentoArchivo segmentoArchivoActual = null;
+
+        //List<SegmentoArchivo> listaSegmentoArchivo = new List<SegmentoArchivo>();
+        SegmentoArchivo dataSegmentoArchivo = new SegmentoArchivo();
         List<DatosMedico> datosMedico = new List<DatosMedico>();
+        List<DatosReservaCitas> datosReservasCitasRegistrado = new List<DatosReservaCitas>();
+        List<DatosReservaCitas> datosReservasCitasNuevas = new List<DatosReservaCitas>();
+        int SectionActualFile = Constantes.SeccionActualRegistrados;
+        string FechaCitasActual = String.Empty;
         foreach (string linea in LineaArchivo)
         {
+            if (linea.Contains(Constantes.IdentificadorSeccionNuevasCitas))
+            {
+                SectionActualFile = Constantes.SeccionActualNuevosCitas;
+            }
+            
 
             string[] valorLinea = linea.Split('|');
-            if (valorLinea.Length >= 9)
+            if (valorLinea.Length > 1)
             {
                 if (valorLinea[4].Trim() == "ADULTO" || valorLinea[4].Trim() == "PMENOR")
                 {
-                    DatosPaciente datoCitaAnterior = new DatosPaciente
+                    DatosReservaCitas datoCitaAnterior = new DatosReservaCitas
                     {
+                        FechaCita = FechaCitasActual,
                         Hora = valorLinea[0],
                         Tipo = valorLinea[1],
                         Especialidad = valorLinea[2],
@@ -45,9 +57,10 @@ public class Program
                         };
                     }
 
-                    if (segmentoArchivoActual != null)
+                    if (dataSegmentoArchivo != null)
                     {
-                        segmentoArchivoActual.DatosPaciente.Add(datoCitaAnterior);
+                        datosReservasCitasRegistrado.Add(datoCitaAnterior);
+                        //segmentoArchivoActual.DatosReservasCitasRegistrado.Add(datoCitaAnterior);
                     }
 
                     DatosMedico datoMedico = new DatosMedico
@@ -70,7 +83,7 @@ public class Program
                 }
                 else
                 {
-                    DatosPaciente datoCitaNueva = new DatosPaciente
+                    DatosReservaCitas datoCitaNueva = new DatosReservaCitas
                     {
                         FechaCita = valorLinea[0],
                         Hora = valorLinea[1],
@@ -105,9 +118,10 @@ public class Program
                         };
                     }
 
-                    if (segmentoArchivoActual != null)
+                    if (dataSegmentoArchivo != null)
                     {
-                        segmentoArchivoActual.NuevasCitas.Add(datoCitaNueva);
+                        datosReservasCitasNuevas.Add(datoCitaNueva);
+                        //segmentoArchivoActual.DatosReservasCitasNuevas.Add(datoCitaNueva);
                     }
 
                     DatosMedico datoMedicoCitaNueva = new DatosMedico
@@ -131,37 +145,41 @@ public class Program
             }
             else
             {
-                segmentoArchivoActual = new SegmentoArchivo
-                {
-                    Fecha = valorLinea[0],
-                    DatosPaciente = new List<DatosPaciente>(),
-                    NuevasCitas = new List<DatosPaciente>()
-                };
-                listaSegmentoArchivo.Add(segmentoArchivoActual);
+                FechaCitasActual = valorLinea[0];
+                //dataSegmentoArchivo = new SegmentoArchivo
+                //{
+                //    Fecha = valorLinea[0],
+                //    DatosReservasCitasRegistrado = new List<DatosReservaCitas>(),
+                //    DatosReservasCitasNuevas = new List<DatosReservaCitas>()
+                //};
+                //listaSegmentoArchivo.Add(segmentoArchivoActual);
             }
 
 
         }
+        dataSegmentoArchivo.DatosReservasCitasRegistrado = datosReservasCitasRegistrado;
+        dataSegmentoArchivo.DatosReservasCitasNuevas = datosReservasCitasNuevas;
 
-
-        foreach (var datoSeleccionado in listaSegmentoArchivo)
-        {
-            if (datoSeleccionado.DatosPaciente.Count > 0)
-            {
-                ProgramHelpers.ImprimirListadoCitas(datoSeleccionado);
-            }
-            if (datoSeleccionado.NuevasCitas.Count > 0)
-            {
-                ProgramHelpers.ImprimirCitasNuevas(datoSeleccionado.NuevasCitas);
-            }
-        }
+        ProgramHelpers.ImprimirListadoCitas(dataSegmentoArchivo.DatosReservasCitasRegistrado);
+        ProgramHelpers.ImprimirCitasNuevas(dataSegmentoArchivo.DatosReservasCitasNuevas);
+        //foreach (var datoSeleccionado in segmentoArchivoActual.)
+        //{
+        //    if (datoSeleccionado.DatosPaciente.Count > 0)
+        //    {
+        //        ProgramHelpers.ImprimirListadoCitas(datoSeleccionado);
+        //    }
+        //    if (datoSeleccionado.NuevasCitas.Count > 0)
+        //    {
+        //        ProgramHelpers.ImprimirCitasNuevas(segmentoArchivoActual.NuevasCitas);
+        //    }
+        //}
     }
 
 
-    public void LecturaCitasAnteriores(){
-        
-        
-       }
+    public void LecturaCitasAnteriores()
+    {
+
+    }
 
 
 }

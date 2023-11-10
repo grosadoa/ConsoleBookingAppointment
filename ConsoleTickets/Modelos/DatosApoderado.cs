@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTickets.Models
+namespace ConsoleBookingAppointment.Models
 {
-    class DatosApoderado
+    public class DatosApoderado
     {
         public string Tipo { get; set; }
         public string Nombre { get; set; }

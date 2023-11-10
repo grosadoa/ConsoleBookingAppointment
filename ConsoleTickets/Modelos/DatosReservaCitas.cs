@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTickets.Models
+namespace ConsoleBookingAppointment.Models
 {
-    class DatosPaciente
+    public class DatosReservaCitas
     {
         public string FechaCita { get; set; }
         public string Hora { get; set; }

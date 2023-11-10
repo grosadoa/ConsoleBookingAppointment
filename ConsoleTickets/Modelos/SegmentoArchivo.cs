@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTickets.Models
+namespace ConsoleBookingAppointment.Models
 {
-    class SegmentoArchivo
+    public class SegmentoArchivo
     {
-        public string Fecha { get; set; }
-        public List<DatosPaciente> DatosPaciente { get; set; }
-        public List<DatosPaciente> NuevasCitas { get; set; }
+        //public string Fecha { get; set; }
+        public List<DatosReservaCitas> DatosReservasCitasRegistrado { get; set; } = new List<DatosReservaCitas>();
+        public List<DatosReservaCitas> DatosReservasCitasNuevas { get; set; } = new List<DatosReservaCitas>();
     }
 }
