@@ -24,7 +24,6 @@ public class Program
 
             string[] valorLinea = linea.Split('|');
             
-            //if (valorLinea[4].Trim() == "ADULTO" || valorLinea[4].Trim() == "PMENOR")
             if (SectionActualFile == Constantes.SeccionActualRegistrados)
             {
                 if (valorLinea.Length > 1)
