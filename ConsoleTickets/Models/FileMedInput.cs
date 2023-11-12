@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleBookingAppointment.Models
 {
-    public class FileSegment
+    public class FileMedInput
     {
         //public string Fecha { get; set; }
         public List<BookingAppointment> DataReservationsAppointmentsRegistered { get; set; } = new List<BookingAppointment>();
