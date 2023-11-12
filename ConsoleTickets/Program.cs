@@ -1,7 +1,7 @@
-﻿using ConsoleBookingAppointment;
-using ConsoleBookingAppointment.Modelos;
-using ConsoleBookingAppointment.Models;
-using ConsoleBookingAppointment.Utils;
+﻿using BussinessBookingAppointment;
+using BussinessBookingAppointment.Modelos;
+using BussinessBookingAppointment.Models;
+using BussinessBookingAppointment.Utils;
 
 public class Program
 {

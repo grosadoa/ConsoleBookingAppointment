@@ -1,4 +1,4 @@
-﻿using ConsoleBookingAppointment.Models;
+﻿using BussinessBookingAppointment.Models;
 using Microsoft.Win32;
 
 internal static class ProgramHelpers

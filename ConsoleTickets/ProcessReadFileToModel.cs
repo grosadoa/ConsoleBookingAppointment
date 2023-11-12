@@ -1,13 +1,13 @@
-﻿using ConsoleBookingAppointment.Modelos;
-using ConsoleBookingAppointment.Models;
-using ConsoleBookingAppointment.Utils;
+﻿using BussinessBookingAppointment.Modelos;
+using BussinessBookingAppointment.Models;
+using BussinessBookingAppointment.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBookingAppointment
+namespace BussinessBookingAppointment
 {
     public class ProcessReadFileToModel
     {

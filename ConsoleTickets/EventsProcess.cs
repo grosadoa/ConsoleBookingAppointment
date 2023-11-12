@@ -1,5 +1,5 @@
 ﻿using BussinessTickets;
-using ConsoleBookingAppointment.Utils;
+using BussinessBookingAppointment.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBookingAppointment
+namespace BussinessBookingAppointment
 {
     public class EventsProcess
     {

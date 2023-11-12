@@ -1,14 +1,15 @@
-﻿using System;
+﻿using BussinessBookingAppointment.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBookingAppointment.Models
+namespace BussinessBookingAppointment.Modelos
 {
-    public class MedicalRepresentative :Person
+    public class Patient :Person
     {
-        //public string Name { get; set; }
+        //public string Age { get; set; }
         //private string documentType;
         //public string DocumentType
         //{
@@ -32,7 +33,9 @@ namespace ConsoleBookingAppointment.Models
         //        }
         //    }
         //}
-        //public string Document { get; set; }
+        //public string IndentifierDocument { get; set; }
+        public string Phone { get; set; }
         //public string Birthdate { get; set; }
+        public string PatientType { get; set; }
     }
 }

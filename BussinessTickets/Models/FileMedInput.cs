@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBookingAppointment.Models
+namespace BussinessBookingAppointment.Models
 {
     public class FileMedInput
     {

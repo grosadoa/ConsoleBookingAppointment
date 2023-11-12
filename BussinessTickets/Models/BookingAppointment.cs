@@ -1,11 +1,11 @@
-﻿using ConsoleBookingAppointment.Modelos;
+﻿using BussinessBookingAppointment.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBookingAppointment.Models
+namespace BussinessBookingAppointment.Models
 {
     public class BookingAppointment
     {
