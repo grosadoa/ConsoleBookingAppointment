@@ -7,8 +7,8 @@ public class Program
     static void Main()
     {
         // Lectura de archivo
-        //string[] LineaArchivo = File.ReadAllLines(Constantes.RutaArchivo);
-        string[] FileLine = File.ReadAllLines(Constants.FilePath1);
+        string[] FileLine = File.ReadAllLines(Constants.FilePath);
+        //string[] FileLine = File.ReadAllLines(Constants.FilePath1);
 
         FileSegment dataFileSegment = new FileSegment();
         List<Doctor> dataDoctors = new List<Doctor>();
@@ -30,57 +30,61 @@ public class Program
             {
                 if (lineValue.Length > 1)
                 {
-                    BookingAppointment dataPreviousAppointment = new BookingAppointment
+                    BookingAppointment dataRegisteredAppointment = new BookingAppointment
                     {
-                        DateAppointments = dateCurrentAppointments,
-                        Hour = lineValue[0]
+                        DateAppointment = dateCurrentAppointments,
+                        HourAppointment = lineValue[0]
                         
                     };
 
-                    dataPreviousAppointment.Doctor = new Doctor
+                    //dataPreviousAppointment.Doctor = new Doctor
+                    //{
+                    //    SpecialtyType = lineValue[1],
+                    //    Specialty = lineValue[2],
+                    //    Name = lineValue[3]
+                    //};
+                    dataRegisteredAppointment.SpecialtyType = lineValue[1];
+                    dataRegisteredAppointment.Specialty = lineValue[2];
+                    dataRegisteredAppointment.Patient = new Patient
                     {
-                        SpecialtyType = lineValue[1],
-                        Specialty = lineValue[2],
-                        Name = lineValue[3]
-                    };
-
-                    dataPreviousAppointment.Patient = new Patient
-                    {
+                        NamePerson = lineValue[3],
+                        PatientType = lineValue[4],
                         DocumentType = lineValue[5],
-                        Document = lineValue[6],
+                        IndentifierDocument = lineValue[6],
                         Phone = lineValue[7],
                         Birthdate = lineValue[8],
-                        Age = ""
+                        //Age = ""
                     };
 
-                    dataPreviousAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[8]);
+                    //dataPreviousAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[8]);
 
-                    if (lineValue[4].Trim() == "PMENOR" && lineValue.Length >= 13)
+                    //if (lineValue[4].Trim() == "PMENOR" && lineValue.Length >= 13)
+                    if (dataRegisteredAppointment.Patient.PatientType == "PMENOR")
                     {
-                        dataPreviousAppointment.MedicalRepresentative = new MedicalRepresentative
+                        dataRegisteredAppointment.MedicalRepresentative = new MedicalRepresentative
                         {
-                            Name = lineValue[10],
+                            NamePerson = lineValue[10],
                             DocumentType = lineValue[11],
-                            Document = lineValue[12],
+                            IndentifierDocument = lineValue[12],
                             Birthdate = lineValue[13]
                         };
                     }
 
                     if (dataFileSegment != null)
                     {
-                        dataReservationsAppointmentsRegistered.Add(dataPreviousAppointment);
+                        dataReservationsAppointmentsRegistered.Add(dataRegisteredAppointment);
                     }
 
 
-                    if (dataPreviousAppointment.Doctor != null)
-                    {
-                        bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataPreviousAppointment.Doctor.Name));
+                    //if (dataPreviousAppointment.Doctor != null)
+                    //{
+                    //    bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataPreviousAppointment.Doctor.Name));
 
-                        if (!exists)
-                        {
-                            dataDoctors.Add(dataPreviousAppointment.Doctor);
-                        }
-                    }
+                    //    if (!exists)
+                    //    {
+                    //        dataDoctors.Add(dataPreviousAppointment.Doctor);
+                    //    }
+                    //}
                 }
                 else
                 {
@@ -91,36 +95,41 @@ public class Program
             {
                 BookingAppointment dataNewAppointment = new BookingAppointment
                 {
-                    DateAppointments = lineValue[0],
-                    Hour = lineValue[1]
-                };
-
-                dataNewAppointment.Doctor = new Doctor
-                {
+                    DateAppointment = lineValue[0],
+                    HourAppointment = lineValue[1],
                     SpecialtyType = lineValue[2],
                     Specialty = lineValue[3],
-                    Name = lineValue[4]
                 };
+
+                //dataNewAppointment.Doctor = new Doctor
+                //{
+                //    SpecialtyType = lineValue[2],
+                //    Specialty = lineValue[3],
+                //    Name = lineValue[4]
+                //};
 
                 dataNewAppointment.Patient = new Patient
                 {
+                    NamePerson = lineValue[4],
+                    PatientType = lineValue[5],
                     DocumentType = lineValue[6],
-                    Document = lineValue[7],
+                    IndentifierDocument = lineValue[7],
                     Phone = lineValue[8],
                     Birthdate = lineValue[9],
-                    Age = ""
+                    //Age = ""
                 };
 
-                dataNewAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[9]);
+                //dataNewAppointment.Patient.Age = UtilityDates.calculateAge(lineValue[9]);
 
 
-                if (lineValue[5].Trim() == "PMENOR" && lineValue.Length >= 13)
+                //if (lineValue[5].Trim() == "PMENOR" && lineValue.Length >= 13)
+                if (dataNewAppointment.Patient.PatientType == "PMENOR")
                 {
                     dataNewAppointment.MedicalRepresentative = new MedicalRepresentative
                     {
-                        Name = lineValue[11],
+                        NamePerson = lineValue[11],
                         DocumentType = lineValue[12],
-                        Document = lineValue[13],
+                        IndentifierDocument = lineValue[13],
                         Birthdate = lineValue[14]
                     };
                 }
@@ -130,16 +139,15 @@ public class Program
                     dataReservationsAppointmentsNew.Add(dataNewAppointment);
                 }
 
+                //if (dataNewAppointment.Doctor != null)
+                //{
+                //    bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataNewAppointment.Doctor.Name));
 
-                if (dataNewAppointment.Doctor != null)
-                {
-                    bool exists = dataDoctors.Any(objectDataMedical => objectDataMedical.Name.Equals(dataNewAppointment.Doctor.Name));
-
-                    if (!exists)
-                    {
-                        dataDoctors.Add(dataNewAppointment.Doctor);
-                    }
-                }
+                //    if (!exists)
+                //    {
+                //        dataDoctors.Add(dataNewAppointment.Doctor);
+                //    }
+                //}
 
             }
         }

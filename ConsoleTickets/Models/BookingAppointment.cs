@@ -9,9 +9,11 @@ namespace ConsoleBookingAppointment.Models
 {
     public class BookingAppointment
     {
-        public string DateAppointments { get; set; }
-        public string Hour { get; set; }
-        public Doctor? Doctor { get; set; }
+        public string DateAppointment { get; set; }
+        public string HourAppointment { get; set; }
+        public string SpecialtyType { get; set; }
+        public string Specialty { get; set; }
+        //public Doctor? Doctor { get; set; }
         public Patient? Patient { get; set; }
         public MedicalRepresentative? MedicalRepresentative { get; set; } 
     }
