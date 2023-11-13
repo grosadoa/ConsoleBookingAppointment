@@ -95,9 +95,25 @@ namespace BussinessBookingAppointment.Process
             
             bool resultValidateExistsBooked = ValidateExistsBooked(dataToValidate, dataReservationsAppointmentsRegistered);
 
-            if (!resultValidateRepresentativeAdult) 
+            if (!resultValidateExistsBooked) 
             {
-                messageObservation.Add("Un paciente no puede tener citas simultáneas ni en el mismo servicio ni en distintos servicios.");
+                messageObservation.Add("No puede tener citas simultáneas ni en el mismo servicio ni en distintos servicios.");
+                result = false;
+            }
+            
+            bool resultValidateAdvanceBookingSpecialist = ValidateAdvanceBookingSpecialist(dataToValidate);
+
+            if (!resultValidateAdvanceBookingSpecialist) 
+            {
+                messageObservation.Add("Las citas para especialistas deben agendarse con al menos 24h de anticipación.");
+                result = false;
+            }
+            
+            bool resultValidateBookedProfesionalDate = ValidateBookedProfesionalDate(dataToValidate, dataReservationsAppointmentsRegistered);
+
+            if (!resultValidateAdvanceBookingSpecialist) 
+            {
+                messageObservation.Add("Ningún profesional puede tener citas simultáneas.");
                 result = false;
             }
 
@@ -278,5 +294,38 @@ namespace BussinessBookingAppointment.Process
 
 
         // CITAS
+
+
+        //Los espacios para exámenes duran 20 minutos, por lo que la última cita se puede hacer 20 minutos antes de la hora de cierre. (OMITED)
+        //Hay 5 profesionales disponibles.Dos generales y 3 especialistas. 
+        //Las citas para especialistas deben agendarse con al menos 24h de anticipación. => [3.1]
+        //Las citas de medicina general pueden agendarse el mismo día o ser asignadas al instante, sujeto a disponibilidad.
+        //La atención de los generales está disponible la jornada completa.
+        //Ningún profesional puede tener citas simultáneas => [3.2]
+
+        private static bool ValidateAdvanceBookingSpecialist(BookingAppointment dataToValidate) //[3.1]
+        {
+            bool result = true;
+
+            DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
+            TimeSpan appointmentHourValue = TimeSpan.Parse(dataToValidate.HourAppointment);
+
+            if ( !(appointmentDateValue.Date >= DateTime.Now.AddDays(1).Date && appointmentHourValue >= DateTime.Now.AddDays(1).TimeOfDay))
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        private static bool ValidateBookedProfesionalDate(BookingAppointment dataToValidate, List<BookingAppointment> dataReservationsAppointmentsRegistered) //[3.2]
+        {
+            bool result = true;
+
+            
+
+            return result;
+        }
+
     }
 }
