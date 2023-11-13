@@ -13,7 +13,6 @@ namespace BussinessBookingAppointment.Models
         public string HourAppointment { get; set; }
         public string SpecialtyType { get; set; }
         public string Specialty { get; set; }
-        //public Doctor? Doctor { get; set; }
         public Patient? Patient { get; set; }
         public MedicalRepresentative? MedicalRepresentative { get; set; } 
     }

@@ -1,6 +1,7 @@
 ﻿using BussinessBookingAppointment;
 using BussinessBookingAppointment.Modelos;
 using BussinessBookingAppointment.Models;
+using BussinessBookingAppointment.Process;
 using BussinessBookingAppointment.Utils;
 
 public class Program
@@ -10,14 +11,18 @@ public class Program
         FileMedInput dataFileMedInput = new FileMedInput();
         dataFileMedInput = ProcessReadFileToModel.ReadFileMedInput();
 
+        BookingAppointment dataToValidate = dataFileMedInput.DataReservationsAppointmentsNew;
+        List<string> messageObservation = new List<string>();
+        bool isBookingValidate = false;
+        isBookingValidate = BookingAppointmentValidate.ExecuteBookingAppointmentValidate(dataToValidate, dataFileMedInput.DataReservationsAppointmentsRegistered, messageObservation);
+
+        if (isBookingValidate)
+        {
+            dataFileMedInput.DataReservationsAppointmentsRegistered.Add(dataToValidate);
+        }
+
         ProgramHelpers.PrintListAppointments(dataFileMedInput.DataReservationsAppointmentsRegistered);
-        ProgramHelpers.PrintNewAppointment(dataFileMedInput.DataReservationsAppointmentsNew);
-    }
-
-
-    public void LecturaCitasAnteriores()
-    {
-
+        ProgramHelpers.PrintNewAppointment(dataFileMedInput.DataReservationsAppointmentsNew, isBookingValidate, messageObservation);
     }
 
 
