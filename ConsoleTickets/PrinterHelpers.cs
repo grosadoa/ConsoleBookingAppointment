@@ -70,5 +70,15 @@ internal static class PrinterHelpers
         
     }
 
-    
+    public static void PrintListHoliday(List<DateTime> datesHoliday)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"Feriados Registrados");
+
+        datesHoliday.ForEach(ff => 
+        { 
+            Console.WriteLine($"Fecha: {ff.ToShortDateString()}");
+        });
+        Console.WriteLine();
+    }
 }

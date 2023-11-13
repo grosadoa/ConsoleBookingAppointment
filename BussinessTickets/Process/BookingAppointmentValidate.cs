@@ -29,6 +29,22 @@ namespace BussinessBookingAppointment.Process
                 result = false;
             }
 
+            bool resultValidateDayHoliday = ValidateDayHoliday(dataToValidate);
+
+            if (!resultValidateDayHoliday) 
+            {
+                messageObservation.Add("Los días feriados no hay atención de ningún servicio.");
+                result = false;
+            }
+            
+            bool resultValidateDateFuture = ValidateDateFuture(dataToValidate);
+
+            if (!resultValidateDateFuture) 
+            {
+                messageObservation.Add("Solo se pueden registrar citas en el futuro.");
+                result = false;
+            }
+
             return result;
         }
 
@@ -88,7 +104,27 @@ namespace BussinessBookingAppointment.Process
             return result;
         }
 
+        private static bool ValidateDayHoliday(BookingAppointment dataToValidate) //[1.3]
+        {
+            bool result = true;
 
+            DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
+
+            result = !RepositorySystem.datesHoliday.Any(valueItemHoliday => valueItemHoliday == appointmentDateValue);
+
+            return result;
+        }
+        
+        private static bool ValidateDateFuture(BookingAppointment dataToValidate) //[1.4]
+        {
+            bool result = true;
+
+            DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
+
+            result = appointmentDateValue > DateTime.Now.Date ? true : false;
+
+            return result;
+        }
 
         // PACIENTE
 

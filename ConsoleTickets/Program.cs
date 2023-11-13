@@ -22,6 +22,7 @@ public class Program
         }
 
         PrinterHelpers.PrintListAppointments(dataFileMedInput.DataReservationsAppointmentsRegistered);
+        PrinterHelpers.PrintListHoliday(RepositorySystem.datesHoliday);
         PrinterHelpers.PrintNewAppointment(dataFileMedInput.DataReservationsAppointmentsNew, isBookingValidate, messageObservation);
     }
 
