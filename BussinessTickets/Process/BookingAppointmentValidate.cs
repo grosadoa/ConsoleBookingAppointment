@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BussinessBookingAppointment.Utils;
+using System.ComponentModel.Design;
 
 namespace BussinessBookingAppointment.Process
 {
@@ -307,6 +308,8 @@ namespace BussinessBookingAppointment.Process
         {
             bool result = true;
 
+            if(dataToValidate.SpecialtyType == Constants.TypeSpecialist_General) return result = true;
+
             DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
             TimeSpan appointmentHourValue = TimeSpan.Parse(dataToValidate.HourAppointment);
 
@@ -322,10 +325,36 @@ namespace BussinessBookingAppointment.Process
         {
             bool result = true;
 
-            
+            bool ExoneratedByTwoGeneral = true;
+            DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
+            TimeSpan appointmentHourValue = TimeSpan.Parse(dataToValidate.HourAppointment);
+
+            if(dataToValidate.SpecialtyType == Constants.TypeSpecialist_Specialist)
+            {
+                ExoneratedByTwoGeneral = false;
+            }
+            else
+            {
+                if (dataReservationsAppointmentsRegistered.Count(cc => DateTime.Parse(cc.DateAppointment) == appointmentDateValue && 
+                                                                        TimeSpan.Parse(cc.HourAppointment) == appointmentHourValue &&
+                                                                        cc.SpecialtyType == Constants.TypeSpecialist_General) == 1)
+                {
+                    ExoneratedByTwoGeneral = true;
+                }
+                else
+                {
+                    ExoneratedByTwoGeneral = false;
+                }
+            }
+
+            if(!ExoneratedByTwoGeneral)
+                if ( dataReservationsAppointmentsRegistered.Any(aa => DateTime.Parse(aa.DateAppointment) == appointmentDateValue && TimeSpan.Parse(aa.HourAppointment) == appointmentHourValue && 
+                    aa.SpecialtyType == dataToValidate.Specialty))
+                {
+                    result = false;
+                }
 
             return result;
         }
-
     }
 }

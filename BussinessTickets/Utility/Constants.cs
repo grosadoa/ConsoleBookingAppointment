@@ -25,6 +25,8 @@ namespace BussinessBookingAppointment.Utils
         public static int CurrentSectionNewAppointments = 2;
         public static string TypePatiente_Adult = "ADULTO";
         public static string TypePatiente_Minor = "PMENOR";
+        public static string TypeSpecialist_General = "GENERAL";
+        public static string TypeSpecialist_Specialist = "ESPECIALISTA";
 
 
         public class NameTypeTickets

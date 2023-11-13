@@ -83,7 +83,7 @@ namespace BussinessBookingAppointment
                     {
                         DateAppointment = lineValue[0],
                         HourAppointment = lineValue[1],
-                        SpecialtyType = lineValue[2],
+                        SpecialtyType = lineValue[2].Trim(),
                         Specialty = lineValue[3],
                         PhoneContact = lineValue[8],
                     };
