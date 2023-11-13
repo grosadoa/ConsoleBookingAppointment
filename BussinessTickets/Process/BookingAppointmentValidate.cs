@@ -112,7 +112,7 @@ namespace BussinessBookingAppointment.Process
             
             bool resultValidateBookedProfesionalDate = ValidateBookedProfesionalDate(dataToValidate, dataReservationsAppointmentsRegistered);
 
-            if (!resultValidateAdvanceBookingSpecialist) 
+            if (!resultValidateBookedProfesionalDate) 
             {
                 messageObservation.Add("Ningún profesional puede tener citas simultáneas.");
                 result = false;
