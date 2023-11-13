@@ -9,7 +9,6 @@ namespace BussinessBookingAppointment.Modelos
 {
     public class Patient :Person
     {
-        public string Phone { get; set; }
         public string PatientType { get; set; }
     }
 }

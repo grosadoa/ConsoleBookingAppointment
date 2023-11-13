@@ -46,19 +46,19 @@ namespace BussinessBookingAppointment
 
                         dataRegisteredAppointment.SpecialtyType = lineValue[1];
                         dataRegisteredAppointment.Specialty = lineValue[2];
+                        dataRegisteredAppointment.PhoneContact = lineValue[7];
                         dataRegisteredAppointment.Patient = new Patient
                         {
                             NamePerson = lineValue[3],
                             PatientType = lineValue[4],
                             DocumentType = lineValue[5],
                             IndentifierDocument = lineValue[6],
-                            Phone = lineValue[7],
                             Birthdate = lineValue[8],
                         };
 
                         if (dataRegisteredAppointment.Patient.PatientType == "PMENOR")
                         {
-                            dataRegisteredAppointment.MedicalRepresentative = new MedicalRepresentative
+                            dataRegisteredAppointment.MedicalRepresentative = new PatientRepresentative
                             {
                                 NamePerson = lineValue[10],
                                 DocumentType = lineValue[11],
@@ -85,6 +85,7 @@ namespace BussinessBookingAppointment
                         HourAppointment = lineValue[1],
                         SpecialtyType = lineValue[2],
                         Specialty = lineValue[3],
+                        PhoneContact = lineValue[8],
                     };
 
                     dataNewAppointment.Patient = new Patient
@@ -93,14 +94,13 @@ namespace BussinessBookingAppointment
                         PatientType = lineValue[5],
                         DocumentType = lineValue[6],
                         IndentifierDocument = lineValue[7],
-                        Phone = lineValue[8],
                         Birthdate = lineValue[9],
                     };
 
 
                     if (dataNewAppointment.Patient.PatientType == "PMENOR")
                     {
-                        dataNewAppointment.MedicalRepresentative = new MedicalRepresentative
+                        dataNewAppointment.MedicalRepresentative = new PatientRepresentative
                         {
                             NamePerson = lineValue[11],
                             DocumentType = lineValue[12],

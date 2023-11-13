@@ -17,7 +17,7 @@ internal static class PrinterHelpers
 
             foreach (var DataAppointments in listAppointments.Where(ww => ww.DateAppointment == f))
             {
-                string rowCita = $"| {DataAppointments.HourAppointment} | {DataAppointments.SpecialtyType} | {DataAppointments.Specialty,-12} | {DataAppointments.Patient.NamePerson} | {DataAppointments.Patient.DocumentType,-11} | {DataAppointments.Patient.IndentifierDocument,-11} | {DataAppointments.Patient.Phone,-10} | {DataAppointments.Patient.Birthdate,-13} |";
+                string rowCita = $"| {DataAppointments.HourAppointment} | {DataAppointments.SpecialtyType} | {DataAppointments.Specialty,-12} | {DataAppointments.Patient.NamePerson} | {DataAppointments.Patient.DocumentType,-11} | {DataAppointments.Patient.IndentifierDocument,-11} | {DataAppointments.PhoneContact,-10} | {DataAppointments.Patient.Birthdate,-13} |";
 
 
                 if (DataAppointments.MedicalRepresentative != null)
@@ -47,7 +47,7 @@ internal static class PrinterHelpers
         Console.WriteLine($"Nombre: {listAppointments.Patient.NamePerson}");
         Console.WriteLine($"T. Documento: {listAppointments.Patient.DocumentType}");
         Console.WriteLine($"Documento: {listAppointments.Patient.IndentifierDocument}");
-        Console.WriteLine($"Teléfono: {listAppointments.Patient.Phone}");
+        Console.WriteLine($"Teléfono: {listAppointments.PhoneContact}");
         Console.WriteLine($"F. Nacimiento: {listAppointments.Patient.Birthdate}");
 
         Console.WriteLine();

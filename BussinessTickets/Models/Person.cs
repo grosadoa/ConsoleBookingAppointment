@@ -12,5 +12,6 @@ namespace BussinessBookingAppointment.Models
         public string DocumentType { get; set; }
         public string IndentifierDocument { get; set; }
         public string Birthdate { get; set; }
+
     }
 }

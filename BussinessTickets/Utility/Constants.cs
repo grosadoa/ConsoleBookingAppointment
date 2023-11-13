@@ -15,11 +15,17 @@ namespace BussinessBookingAppointment.Utils
         //public static string FilePath = "\\med_input_error_dayHourOperative_friday_after_1300.txt";
         //public static string FilePath = "\\med_input_error_dayHourOperative_monday_thurday_after_1900.txt";
         //public static string FilePath = "\\med_input_error_holiday.txt";
-        public static string FilePath = "\\med_input_error_dateFuture.txt";
+        //public static string FilePath = "\\med_input_error_dateFuture.txt";
+        //public static string FilePath = "\\med_input_error_consecutiveDate_otherbooking.txt";
+        //public static string FilePath = "\\med_input_error_consecutiveDate.txt";
+        public static string FilePath = "\\med_input_success_consecutiveDate.txt";
         //public static string FilePath1 = "C:\\Users\\Rp3 Software\\Documents\\med_input.txt";
         public static string NewAppointmentsSectionIdentifier = "NUEVA CITA";
         public static int CurrentRegisteredSection = 1;
         public static int CurrentSectionNewAppointments = 2;
+        public static string TypePatiente_Adult = "ADULTO";
+        public static string TypePatiente_Minor = "PMENOR";
+
 
         public class NameTypeTickets
         {
