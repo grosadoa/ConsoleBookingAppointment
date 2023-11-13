@@ -36,10 +36,10 @@ namespace BussinessBookingAppointment.Process
 
         //El establecimiento opera de lunes a viernes => [1.1]
         //Las consultas médicas tienen los siguientes horarios: Lunes a jueves 8:00 a 19:00 Viernes 8:00 a 13:00 => [1.2]
-        //El laboratorio clínico tiene el siguiente horario: Lunes a viernes 7:00 a 16:00
-        //Los días feriados no hay atención de ningún servicio.
-        //Solo se pueden registrar citas en el futuro.
-        //Los espacios son consecutivos, es decir 08:00, 08:20, etc
+        //El laboratorio clínico tiene el siguiente horario: Lunes a viernes 7:00 a 16:00 (OMITED)
+        //Los días feriados no hay atención de ningún servicio.[1.3]
+        //Solo se pueden registrar citas en el futuro.[1.4]
+        //Los espacios son consecutivos, es decir 08:00, 08:20, etc [1.5]
 
 
         private static bool ValidateDayOperative(BookingAppointment dataToValidate) //[1.1]
