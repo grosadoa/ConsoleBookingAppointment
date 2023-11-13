@@ -61,10 +61,28 @@ namespace BussinessBookingAppointment.Process
             bool result = true;
 
             DateTime appointmentDateValue = DateTime.Parse(dataToValidate.DateAppointment);
+            TimeSpan appointmentHourValue = TimeSpan.Parse( dataToValidate.HourAppointment);
 
-            if (appointmentDateValue.DayOfWeek == DayOfWeek.Saturday || appointmentDateValue.DayOfWeek == DayOfWeek.Sunday)
+            switch (appointmentDateValue.DayOfWeek)
             {
-                result = false;
+                case DayOfWeek.Monday:
+                case DayOfWeek.Tuesday:
+                case DayOfWeek.Wednesday:
+                case DayOfWeek.Thursday:
+                    if (!(appointmentHourValue >= TimeSpan.Parse("08:00") && appointmentHourValue <= TimeSpan.Parse("19:00")))
+                    {
+                        result = false;
+                    }
+                    break;
+                case DayOfWeek.Friday:
+
+                    if (!(appointmentHourValue >= TimeSpan.Parse("08:00") && appointmentHourValue <= TimeSpan.Parse("13:00")))
+                    {
+                        result = false;
+                    }
+                    break;
+                default:
+                    break;
             }
 
             return result;

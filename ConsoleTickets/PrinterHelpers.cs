@@ -1,7 +1,7 @@
 ﻿using BussinessBookingAppointment.Models;
 using Microsoft.Win32;
 
-internal static class ProgramHelpers
+internal static class PrinterHelpers
 {
     public static void PrintListAppointments(List<BookingAppointment> listAppointments)
     {
@@ -61,7 +61,7 @@ internal static class ProgramHelpers
         }
 
         Console.WriteLine();
-        Console.WriteLine(isBookingValidate ? "Sucess...","Error!");
+        Console.WriteLine(isBookingValidate ? "Sucess...":"Error!");
 
         if (!isBookingValidate)
         {

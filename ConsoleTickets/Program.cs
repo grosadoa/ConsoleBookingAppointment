@@ -21,8 +21,8 @@ public class Program
             dataFileMedInput.DataReservationsAppointmentsRegistered.Add(dataToValidate);
         }
 
-        ProgramHelpers.PrintListAppointments(dataFileMedInput.DataReservationsAppointmentsRegistered);
-        ProgramHelpers.PrintNewAppointment(dataFileMedInput.DataReservationsAppointmentsNew, isBookingValidate, messageObservation);
+        PrinterHelpers.PrintListAppointments(dataFileMedInput.DataReservationsAppointmentsRegistered);
+        PrinterHelpers.PrintNewAppointment(dataFileMedInput.DataReservationsAppointmentsNew, isBookingValidate, messageObservation);
     }
 
 

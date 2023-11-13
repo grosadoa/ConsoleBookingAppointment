@@ -9,8 +9,12 @@ namespace BussinessBookingAppointment.Utils
     public class Constants
     {
 
-        public static string FilePath = "\\med_input.txt";
-        public static string FilePath1 = "C:\\Users\\Rp3 Software\\Documents\\med_input.txt";
+        //public static string FilePath = "\\med_input.txt";
+        //public static string FilePath = "\\med_input_success.txt";
+        //public static string FilePath = "\\med_input_error_dayoperative.txt";
+        //public static string FilePath = "\\med_input_error_dayHourOperative_friday_after_1300.txt";
+        public static string FilePath = "\\med_input_error_dayHourOperative_monday_thurday_after_1900.txt";
+        //public static string FilePath1 = "C:\\Users\\Rp3 Software\\Documents\\med_input.txt";
         public static string NewAppointmentsSectionIdentifier = "NUEVA CITA";
         public static int CurrentRegisteredSection = 1;
         public static int CurrentSectionNewAppointments = 2;
