@@ -67,10 +67,7 @@ namespace BussinessBookingAppointment
                             };
                         }
 
-                        if (dataFileMedInput != null)
-                        {
-                            dataReservationsAppointmentsRegistered.Add(dataRegisteredAppointment);
-                        }
+                        dataReservationsAppointmentsRegistered.Add(dataRegisteredAppointment);
                     }
                     else
                     {
