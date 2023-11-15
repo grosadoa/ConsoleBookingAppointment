@@ -18,7 +18,6 @@ namespace BussinessBookingAppointment
             //string[] FileLine = File.ReadAllLines(Constants.FilePath1);
 
             FileMedInput dataFileMedInput = new FileMedInput();
-            List<Doctor> dataDoctors = new List<Doctor>();
             List<BookingAppointment> dataReservationsAppointmentsRegistered = new List<BookingAppointment>();
             BookingAppointment dataReservationsAppointmentsNew = new BookingAppointment();
             int sectionFileSegment = Constants.CurrentRegisteredSection;
